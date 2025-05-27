@@ -1,0 +1,2 @@
+class GoalCompletionsController < ApplicationController
+end
