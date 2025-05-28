@@ -1,6 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :group
+  validates :name, presence: true
 
 
 
@@ -12,5 +13,8 @@ class Goal < ApplicationRecord
     @goal = Goal.find(params[:id])
   end
 
+
+
+  
 
 end
