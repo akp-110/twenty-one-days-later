@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :group
-  validates :title, presence: true
+  validates :name, presence: true
+  validates :reason, presence: true
 end
