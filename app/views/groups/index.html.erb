@@ -2,11 +2,12 @@
 
 <%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
 
+
 <% if @groups.any? %>
   <ul>
     <% @groups.each do |group| %>
       <li>
-        <h3><%= group.name %></h3>
+        <h3><%= link_to group.name, group_path(group)  %></h3>
 
         <% if group.members.include?(current_user) %>
           <p> ✅ You’re already a member</p>
@@ -19,3 +20,4 @@
 <% else %>
   <p>No groups found.</p>
 <% end %>
+

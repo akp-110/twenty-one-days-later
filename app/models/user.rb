@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :joined_groups, through: :group_memberships, source: :group
   has_many :goals
   has_many :groups
+  has_many :goals
 end

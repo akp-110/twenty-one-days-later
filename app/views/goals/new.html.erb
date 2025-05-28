@@ -1,5 +1,6 @@
 <h1>Create a New Goal</h1>
 
+
 <%= form_with(model: @goal, url: group_goals_path(@group), method: :post) do |f| %>
   <%= f.label :group_id, "Select a Group" %>
   <%= f.collection_select :group_id, current_user.groups, :id, :name %>
