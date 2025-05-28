@@ -2,6 +2,7 @@ class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :group
   validates :name, presence: true
+  validates :reason, presence: true
 
 
 
@@ -12,9 +13,5 @@ class Goal < ApplicationRecord
   def show
     @goal = Goal.find(params[:id])
   end
-
-
-
-
 
 end

@@ -1,0 +1,11 @@
+<h1>Edit Your Goal</h1>
+
+<%= form_with(model: @goal, url: group_goal_path(@goal.group, @goal), method: :patch, local: true) do |f| %>
+  <%= f.label :name, "Goal Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :reason, "Why is this goal important?" %>
+  <%= f.text_area :reason %>
+
+  <%= f.submit "Update Goal", class: "btn btn-success" %>
+<% end %>
