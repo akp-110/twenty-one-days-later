@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   resources :goals
   resources :groups, only: [:index, :new, :create]
 
+  resources :groups do
+    resources :group_memberships, only: [:create]
+  end
+
 end

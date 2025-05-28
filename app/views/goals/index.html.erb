@@ -1,0 +1,13 @@
+<h2>Your Goals</h2>
+
+<% @goals.each do |goal| %>
+  <div class="goal-card">
+    <h3><%= goal.name %></h3>
+    <p><%= goal.reason %></p>
+    <p><strong>Created on:</strong> <%= goal.created_at.strftime("%d %b %Y") %></p>
+    <%= link_to "Edit", edit_group_goal_path(goal.group, goal), class: "btn btn-primary" %>
+    <%= link_to "Delete", group_goal_path(goal.group, goal), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+<% end %>
+
+<%= link_to "Set a New Goal", new_group_goal_path(@group), class: "btn btn-success" %>
