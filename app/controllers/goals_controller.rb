@@ -4,17 +4,17 @@ class GoalsController < ApplicationController
   end
 
   def create
-    @goal = current_user.goal.build(goal_params)
+    @goal = current_user.goals.build(goal_params)
     if @goal.save
       redirect_to @goal, notice: "Your goal is set. Now let’s make it happen—one step, one day at a time!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
-  def goal_params
-    params.require(:goal).permit(:title, :description)
-  end
 
+  def goal_params
+    params.require(:goal).permit(:name, :reason)
+  end
 end
