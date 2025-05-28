@@ -17,9 +17,18 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
 
+    <%# <% if controller_name == "" && action_name == "" %> 
+
+    <%# <% unless controller_name == "pages"%>
+
+     <%= render "shared/navbar" %>
+
+    <%# <% end %>
+
+    <%= render "shared/flashes" %>
     <%= yield %>
+
   </body>
 </html>
