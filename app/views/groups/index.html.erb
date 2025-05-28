@@ -2,8 +2,20 @@
 
 <%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
 
-<ul>
-  <% @groups.each do |group| %>
-    <li><%= group.name %></li>
-  <% end %>
-</ul>
+<% if @groups.any? %>
+  <ul>
+    <% @groups.each do |group| %>
+      <li>
+        <h3><%= group.name %></h3>
+
+        <% if group.members.include?(current_user) %>
+          <p> ✅ You’re already a member</p>
+        <% else %>
+          <%= button_to "Join Group", group_group_memberships_path(group), method: :post, class: "btn btn-primary" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No groups found.</p>
+<% end %>
