@@ -13,9 +13,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
   resources :goals
   resources :groups, only: [:index, :new, :create]
+
   resources :groups do
     resources :group_memberships, only: [:create]
   end
+
 end
