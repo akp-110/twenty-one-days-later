@@ -1,0 +1,9 @@
+<h1>My Groups</h1>
+
+<%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @groups.each do |group| %>
+    <li><%= group.name %></li>
+  <% end %>
+</ul>
