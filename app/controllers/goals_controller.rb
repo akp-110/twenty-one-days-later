@@ -1,6 +1,11 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!
+ before_action :authenticate_user!
 
+
+  def index
+  end
+
+ 
   def new
     @group = current_user.groups.find(params[:group_id])
     @goal = @group.goals.build

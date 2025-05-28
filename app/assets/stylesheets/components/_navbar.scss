@@ -55,4 +55,23 @@ div.content {
   }
 }
 
+.sidebar-wrapper {
+  width: 250px;
+  position: absolute;
+}
 
+.main-content {
+  margin-left: 250px;
+}
+
+.open-navbar-icon {
+  font-size: 30px;
+  cursor: pointer;
+  display: block;
+  background: rgba(185, 185, 185, 0.85);
+  border-radius: 51px;
+  position: absolute;
+  bottom: 5px;
+  padding: 10px;
+  left: 10px;
+}
