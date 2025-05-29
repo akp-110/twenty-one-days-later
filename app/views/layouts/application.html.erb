@@ -17,9 +17,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="toggle-navbar">
 
-    <%# <% if controller_name == "" && action_name == "" %> 
+    <%# <% if controller_name == "" && action_name == "" %>
 
     <%# <% unless controller_name == "pages"%>
 
@@ -28,7 +28,10 @@
     <%# <% end %>
 
     <%= render "shared/flashes" %>
-    <%= yield %>
+
+    <div class="main-content" data-toggle-navbar-target="main">
+      <%= yield %>
+    </div>
 
       <%= render "shared/footer" %>
 
