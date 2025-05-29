@@ -1,0 +1,20 @@
+<h1>sticker sheet!</h1>
+
+<%# 
+<h1><%= @goal.name %></h1>
+<p><strong>Start Date:</strong> <%= @goal.start_date %></p>
+<p><strong>Reason:</strong> <%= @goal.reason %></p>
+<p><strong>Category:</strong> <%= @goal.category %></p>
+
+<h2>Progress (21 Days)</h2>
+<div id="stars-container" data-goal-id="<%= @goal.id %>">
+  <% (1..21).each do |day| %>
+    <% date = @goal.start_date + (day - 1).days %>
+    <% completed = @completed_dates.include?(date) %>
+    <span
+      class="star <%= 'completed' if completed %>"
+      data-date="<%= date %>">
+      ⭐
+    </span>
+  <% end %>
+</div> %>
