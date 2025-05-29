@@ -1,0 +1,33 @@
+
+label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  width: 60%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-title {
+  padding: 30px;
+}
