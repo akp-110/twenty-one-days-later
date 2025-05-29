@@ -1,17 +1,34 @@
 <div class="sidebar-wrapper">
   <div data-toggle-navbar-target="sidebar" class="sidebar">
-    <div class="d-flex align-items-center justify-content-between p-3">
-      <button class="closebtn" data-action="click->toggle-navbar#close">  &times; </button>
-      <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-    </div>
-    <a class="" href="/create"><i class="fa-solid fa-square-plus"></i> Create a new habit</a>
-    <a class="" href="/progress"><i class="fa-solid fa-chart-line"></i> Progress</a>
-    <a class="" href="/habits"><i class="fa-solid fa-check-circle"></i> Your habit</a>
-    <a class="" href="/members"><i class="fa-solid fa-users"></i> Members</a>
-    <hr>
-    <a class="" href="/notifications"><i class="fa-solid fa-bell"></i> Notification</a>
-    <a class="" href="/settings"><i class="fa-solid fa-gear"></i> Setting</a>
-    <a class="" href="/support"><i class="fa-solid fa-circle-question"></i> Support</a>
+
+      <div class="d-flex align-items-center justify-content-between p-3">
+        <button class="closebtn" data-action="click->toggle-navbar#close">  &times; </button>
+        <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+      </div>
+
+
+      <%= link_to new_group_path do %>
+       <i class="fa-solid fa-square-plus"></i> Create a group
+      <% end %>
+
+      <hr>
+
+     <%= link_to groups_path do %>
+        <i class="fa-solid fa-users"></i> Your community
+      <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </div>
 
