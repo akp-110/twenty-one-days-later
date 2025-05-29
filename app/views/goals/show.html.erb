@@ -1,4 +1,10 @@
+<div class="form-container">
 <h1><%= @goal.name %></h1>
 <p><%= @goal.reason %></p>
 
+<p><strong>Start Date:</strong> <%= @goal.start_date.present? ? @goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
+
+<div class="form-action">
 <%= link_to "Back to Goals", group_goals_path(@goal.group), class: "btn btn-secondary" %>
+</div>
+</div>
