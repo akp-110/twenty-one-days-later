@@ -1,18 +1,30 @@
 <h1>My Groups</h1>
 
-<%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
-
 <% if @groups.any? %>
-  <ul>
+  <ul class="list-group">
     <% @groups.each do |group| %>
-      <li>
+      <li class="list-group-item">
         <h3><%= group.name %></h3>
 
+        <!-- Show group members -->
+        <p><strong>Members:</strong>
+          <% if group.members.any? %>
+            <ul>
+              <% group.members.each do |member| %>
+                <li><%= member.email %></li> <!-- Or member.name if available -->
+              <% end %>
+            </ul>
+          <% else %>
+            <em>No members yet.</em>
+          <% end %>
+        </p>
+
+        <!-- Show current user's status
         <% if group.members.include?(current_user) %>
-          <p> ✅ You’re already a member</p>
+           <p class="text-success">✅ You’re already a member</p>
         <% else %>
-          <%= button_to "Join Group", group_group_memberships_path(group), method: :post, class: "btn btn-primary" %>
-        <% end %>
+          <%= button_to "Join Group", group_group_memberships_path(group), method: :post, class: "btn btn-sm btn-outline-primary" %>
+        <% end %>-->
       </li>
     <% end %>
   </ul>

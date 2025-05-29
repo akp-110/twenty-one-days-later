@@ -15,6 +15,12 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Tom Select CSS -->
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" %>
+
+    <!-- Tom Select JS -->
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js" %>
   </head>
 
   <body><%= render "shared/navbar" %>

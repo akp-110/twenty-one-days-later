@@ -2,8 +2,9 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    #@groups = current_user.joined_groups
-    @groups = Group.all
+  #@groups = current_user.joined_groups
+  @groups = Group.all
+
   end
 
   def new
@@ -11,19 +12,28 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = current_user.groups.build(group_params)
-    if @group.save
-      # Add creator as a group member with 'admin' role
-      GroupMembership.create(user: current_user, group: @group)
-      redirect_to groups_path, notice: "Group created successfully!"
-    else
-      render :new, alert: "Something went wrong."
-    end
+  @group = Group.new(name: group_params[:name])
+  if @group.save
+    # Add selected members
+    emails = group_params[:user_emails].reject(&:blank?)
+    users = User.where(email: emails)
+    users.each { |user| @group.members << user }
+
+    # Add the current user as a member (if not already handled automatically)
+    @group.members << current_user unless @group.members.include?(current_user)
+
+    # Redirect to the My Groups page (usually groups index)
+    redirect_to groups_path, notice: "Group created successfully!"
+  else
+    render :new
   end
+end
+
+
 
   private
 
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name, user_emails: [])
   end
 end
