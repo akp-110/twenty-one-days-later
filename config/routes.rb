@@ -17,10 +17,14 @@ resources :goals
   resources :groups, only: [:index, :new, :create]
 
 
-  resources :goals
-  resources :groups, only: [:index, :new, :create]
 
-  resources :groups do
+
+  resources :groups, only: [:index, :new, :create] do
     resources :group_memberships, only: [:create]
+
   end
+
+
+  resources :goals, only: [:new, :show]
+
 end

@@ -5,10 +5,11 @@ class GoalsController < ApplicationController
   def index
   end
 
- 
+
   def new
-    @group = current_user.groups.find(params[:group_id])
-    @goal = @group.goals.build
+    # @group = current_user.groups.find(params[:group_id])
+    # @goal = @group.goals.build
+    @goal= Goal.new 
   end
 
   def index
