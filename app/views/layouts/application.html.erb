@@ -21,13 +21,14 @@
 
     <%# <% if controller_name == "" && action_name == "" %>
 
-    <%# <% unless controller_name == "pages"%>
+    <% unless controller_name == "pages"%>
 
      <%= render "shared/navbar" %>
 
-    <%# <% end %>
+    <% end %>
 
     <%= render "shared/flashes" %>
+
 
     <div class="main-content" data-toggle-navbar-target="main">
       <%= yield %>
@@ -35,5 +36,13 @@
 
       <%= render "shared/footer" %>
 
+     <div class="main-content" data-toggle-navbar-target="main">
+      <%= yield %>
+    </div>
+    <%= render "shared/footer" %>
+
+
   </body>
 </html>
+
+

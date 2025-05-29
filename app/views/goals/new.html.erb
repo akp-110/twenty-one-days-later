@@ -1,8 +1,15 @@
-<%= form_for @goal do |f| %>
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.label :description %>
-<%= f.text_area :description %>
+<h1>Create a New Goal</h1>
 
-<%= f.submit "Lock It In" %>
+
+<%= form_with(model: @goal, url: group_goals_path(@group), method: :post) do |f| %>
+  <%= f.label :group_id, "Select a Group" %>
+  <%= f.collection_select :group_id, current_user.groups, :id, :name %>
+
+  <%= f.label :name, "Goal Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :reason, "Why is this goal important?" %>
+  <%= f.text_area :reason %>
+
+  <%= f.submit "Lock It In", class: "btn btn-success" %>
 <% end %>
