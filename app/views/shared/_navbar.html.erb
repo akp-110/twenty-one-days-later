@@ -1,11 +1,9 @@
-<!-- The sidebar -->
-<div data-controller="toggle-navbar">
+<div class="sidebar-wrapper">
   <div data-toggle-navbar-target="sidebar" class="sidebar">
     <div class="d-flex align-items-center justify-content-between p-3">
       <button class="closebtn" data-action="click->toggle-navbar#close">  &times; </button>
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
     </div>
-
     <a class="" href="/create"><i class="fa-solid fa-square-plus"></i> Create a new habit</a>
     <a class="" href="/progress"><i class="fa-solid fa-chart-line"></i> Progress</a>
     <a class="" href="/habits"><i class="fa-solid fa-check-circle"></i> Your habit</a>
@@ -15,9 +13,6 @@
     <a class="" href="/settings"><i class="fa-solid fa-gear"></i> Setting</a>
     <a class="" href="/support"><i class="fa-solid fa-circle-question"></i> Support</a>
   </div>
-  <span style="font-size:30px;cursor:pointer" data-action="click->toggle-navbar#open" >&#9776; open</span>
 </div>
-<!-- Page content -->
-<div class="content">
-  ..
-</div>
+
+<i style="font-size:30px;cursor:pointer;display:none" data-action="click->toggle-navbar#open" data-toggle-navbar-target="open" class="fa-solid fa-arrow-right-to-bracket open-navbar-icon"></i>

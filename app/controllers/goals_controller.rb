@@ -1,6 +1,11 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!
+ before_action :authenticate_user!
 
+
+  def index
+  end
+
+ 
   def new
     @group = current_user.groups.find(params[:group_id])
     @goal = @group.goals.build
@@ -12,6 +17,7 @@ class GoalsController < ApplicationController
   end
 
   def create
+
     @group = current_user.groups.find_by(id: params[:group_id])
      if @group.nil?
       redirect_to groups_path, alert: "Invalid group" and return
@@ -19,11 +25,13 @@ class GoalsController < ApplicationController
 
       @goal = @group.goals.build(goal_params.merge(user: current_user))
 
+
     if @goal.save
       redirect_to group_goal_path(@group, @goal), notice: "Your goal is set."
     else
       flash[:alert] = "Something went wrong. Please try again."
       redirect_to new_group_goal_path(@group)
+
     end
   end
 
@@ -63,6 +71,7 @@ class GoalsController < ApplicationController
    end
 
   private
+
   def goal_params
     params.require(:goal).permit(:name, :start_date, :reason)
   end

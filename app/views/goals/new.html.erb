@@ -3,6 +3,7 @@
 <h2>Create a New Goal</h2>
 </div>
 
+
 <%= form_with(model: @goal, url: group_goals_path(@group), method: :post) do |f| %>
   <div class="form-group">
     <%= f.label :group_id, "Select a Group" %>

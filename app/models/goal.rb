@@ -13,4 +13,5 @@ class Goal < ApplicationRecord
   def show
     @goal = Goal.find(params[:id])
   end
+
 end
