@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   resources :groups do
     resources :group_memberships, only: [:create]
   end
-
 end
