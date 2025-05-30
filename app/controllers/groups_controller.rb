@@ -32,9 +32,6 @@ class GroupsController < ApplicationController
     unless @group
       redirect_to groups_path, alert: "Group not found!" and return
     end
-
-end
-
   end
 
     def destroy
@@ -49,3 +46,4 @@ end
   def group_params
     params.require(:group).permit(:name, user_emails: [])
   end
+end
