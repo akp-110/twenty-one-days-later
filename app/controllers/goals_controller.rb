@@ -7,9 +7,8 @@ class GoalsController < ApplicationController
 
 
   def new
-    # @group = current_user.groups.find(params[:group_id])
-    # @goal = @group.goals.build
-    @goal= Goal.new 
+     @group = current_user.groups.find(params[:group_id])
+     @goal = @group.goals.build
   end
 
   def index
