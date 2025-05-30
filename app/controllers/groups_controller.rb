@@ -49,8 +49,3 @@ end
   def group_params
     params.require(:group).permit(:name, user_emails: [])
   end
-
-end
-
- end
-
