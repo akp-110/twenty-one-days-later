@@ -1,0 +1,12 @@
+<div class="group-container">
+  <h2><%= @group.name %></h2>
+  <p><strong>Members:</strong> <%= @group.members.count %></p>
+
+  <div class="form-actions">
+    <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
+  </div>
+</div>

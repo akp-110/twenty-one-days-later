@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <%= yield :head %>
 
@@ -27,11 +28,11 @@
 
     <%# <% if controller_name == "" && action_name == "" %>
 
-    <%# <% unless controller_name == "pages"%>
+    <% unless controller_name == "pages" %>
 
      <%= render "shared/navbar" %>
 
-    <%# <% end %>
+    <% end %>
 
     <%= render "shared/flashes" %>
 
@@ -39,8 +40,6 @@
     <div class="main-content" data-toggle-navbar-target="main">
       <%= yield %>
     </div>
-
-      <%= render "shared/footer" %>
 
   </body>
 </html>

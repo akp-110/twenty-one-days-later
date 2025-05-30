@@ -1,11 +1,11 @@
 <div class="form-container">
   <h1>Create a New Group</h1>
 
-  <%= form_with(model: @group, local: true) do |form| %>
-    <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </div>
+<%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
 
     <br>
 
@@ -20,6 +20,10 @@
   <% end %>
 </div>
 
+  <div>
+   <%= form.submit "Create Group", class: "btn btn-primary mb-3" %>
+  </div>
+<% end %>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
