@@ -27,7 +27,7 @@ class GoalsController < ApplicationController
 
 
     if @goal.save
-      redirect_to group_goal_path(@group, @goal), notice: "Your goal is set."
+      redirect_to groups_path, notice: "Your goal is set! You can view all groups now."
     else
       flash[:alert] = "Something went wrong. Please try again."
       redirect_to new_group_goal_path(@group)
