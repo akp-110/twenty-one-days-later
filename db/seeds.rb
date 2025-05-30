@@ -8,21 +8,31 @@ require "faker"
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+GoalCompletion.destroy_all
+Goal.destroy_all
+GroupMembership.destroy_all
+Group.destroy_all
 User.destroy_all
 
 puts "Database cleaned."
 
 puts "Creating Users..."
-10.times do
+20.times do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  username = Faker::Internet.username
   email = Faker::Internet.unique.email
   password = Faker::Internet.password(min_length: 8)
 
   User.create!(
+    first_name: first_name,
+    last_name: last_name,
+    username: username,
     email: email,
     password: password
   )
 
-  puts "Email: #{email}, Password: #{password}"
+  puts "Email: #{email}, Password: #{password}, Username: #{username}"
 end
 
-puts 'Created 10 users'
+puts 'Created 20 users'

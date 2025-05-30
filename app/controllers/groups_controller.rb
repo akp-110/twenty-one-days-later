@@ -2,9 +2,8 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  #@groups = current_user.joined_groups
-  @groups = Group.all
-
+    # @groups = current_user.joined_groups
+    @groups = Group.all
   end
 
   def new
@@ -12,8 +11,8 @@ class GroupsController < ApplicationController
   end
 
   def create
-  @group = Group.new(name: group_params[:name])
-  if @group.save
+    @group = Group.new(name: group_params[:name])
+    if @group.save
     # Add selected members
     emails = group_params[:user_emails].reject(&:blank?)
     users = User.where(email: emails)
@@ -24,12 +23,10 @@ class GroupsController < ApplicationController
 
     # Redirect to the My Groups page (usually groups index)
     redirect_to groups_path, notice: "Group created successfully!"
-  else
-    render :new
+    else
+      render :new
+    end
   end
-end
-
-
 
   private
 

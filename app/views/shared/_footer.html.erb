@@ -1,10 +1,11 @@
 
-<footer>
         <div class="container">
             <div class="footer-nav">
                 <ul>
                     <li> <%= link_to "Home", root_path %></li>
-                    <li>  <%= link_to "Sign up", new_user_session_path %></li>
+                    <li><%= link_to "Login", user_session_path %></li>
+                    <li>  <%= link_to "Sign up", new_user_registration_path %></li>
+
                 </ul>
             </div>
             <div class="social-icons">
@@ -15,6 +16,6 @@
             </div>
         </div>
         <div class="copyright">
-            <p class="copyrighttext">&copy; 2025 - 21 days leter</p>
+            <p class="copyrighttext">&copy; 2025 - 21 days later</p>
         </div>
     </footer>

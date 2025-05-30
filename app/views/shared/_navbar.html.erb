@@ -1,14 +1,17 @@
+<% if user_signed_in? %>
 <div class="sidebar-wrapper">
   <div data-toggle-navbar-target="sidebar" class="sidebar">
 
       <div class="d-flex align-items-center justify-content-between p-3">
         <button class="closebtn" data-action="click->toggle-navbar#close">  &times; </button>
-        <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+
+        <div id="navbar_username"><strong><%= current_user.username %></strong></div>
+         <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
       </div>
 
 
       <%= link_to new_group_path do %>
-       <i class="fa-solid fa-square-plus"></i> Create a group
+       <i class="fa-solid fa-square-plus"></i> New group
       <% end %>
 
       <hr>
@@ -17,19 +20,10 @@
         <i class="fa-solid fa-users"></i> Your community
       <% end %>
 
-
-
-
-
-
-
-
-
-
-
-
+      <%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}%>
 
   </div>
 </div>
 
 <i style="font-size:30px;cursor:pointer;display:none" data-action="click->toggle-navbar#open" data-toggle-navbar-target="open" class="fa-solid fa-arrow-right-to-bracket open-navbar-icon"></i>
+<% end %>

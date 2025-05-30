@@ -1,20 +1,25 @@
-<h1>Create a New Group</h1>
+<div class="form-container">
+  <h1>Create a New Group</h1>
 
-<%= form_with(model: @group, local: true) do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
+  <%= form_with(model: @group, local: true) do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
 
-  <div>
-    <%= label_tag :user_emails, "Invite Members by Email" %><br>
-    <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control" %>
-  </div>
+    <br>
 
-  <div>
-    <%= link_to "Create New Group", groups_path, class: "btn btn-primary mb-3" %>
-  </div>
-<% end %>
+    <div>
+      <%= label_tag :user_emails, "Invite Members by Email" %><br>
+      <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control" %>
+    </div>
+    <br>
+    <div>
+      <%= form.submit "Create New Group", class: "btn btn-primary mb-3" %>
+    </div>
+  <% end %>
+</div>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -44,3 +49,4 @@
     }
   });
 </script>
+</div>
