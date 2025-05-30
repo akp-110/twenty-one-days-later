@@ -3,4 +3,6 @@ class Group < ApplicationRecord
   has_many :group_memberships
   has_many :members, through: :group_memberships, source: :user
   has_many :goals
+
+  validates :name, presence: true
 end
