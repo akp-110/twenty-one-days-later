@@ -1,6 +1,6 @@
 <div class="form-container">
 <div class="form-title">
-<h2>Create a New Goal</h2>
+<h2>Your Journey Starts Here</h2>
 </div>
 
 
@@ -11,22 +11,22 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :name, "Goal Name" %>
+    <%= f.label :name, "What’s Your Challenge?" %>
     <%= f.text_field :name, class: "form-control", placeholder: "Start running..." %>
   </div>
 
   <div class="form-group">
-    <%= f.label :reason, "Why is this goal important to you?" %>
+    <%= f.label :reason, "Why is this important to you?" %>
     <%= f.text_area :reason, class: "form-control", placeholder: "To have fun with friend..." %>
   </div>
 
   <div class="form-group">
-    <%= f.label :start_date, "Start Date" %>
+    <%= f.label :start_date, "Pick Your Starting Line" %>
     <%= f.date_field :start_date, class: "form-control" %>
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Lock It In", class: "btn btn-success" %>
+    <%= f.submit "Make It Happen", class: "btn btn-success" %>
   </div>
 <% end %>
 </div>
