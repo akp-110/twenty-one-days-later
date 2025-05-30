@@ -7,7 +7,7 @@
       <li class="list-group-item">
         <h3><%= link_to group.name, group_path(group), class: "text-primary" %></h3>
 
-        <!-- Show group members -->
+
         <p><strong>Members:</strong></p>
         <% if group.members.any? %>
           <ul>
@@ -18,6 +18,21 @@
         <% else %>
           <em>No members yet.</em>
         <% end %>
+
+
+        <p><strong>Progress:</strong></p>
+        <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= group.id %>">
+          <% 21.times do |i| %>
+            <span class="star" data-day="<%= i %>">
+              <i class="fa-regular fa-star"></i>  
+              <span class="star-number"><%= i + 1 %></span>
+            </span>
+            <% if i == 20 %>
+              <i id="checkmark-21-<%= group.id %>" class="fa-solid fa-check-circle" style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
+            <% end %>
+          <% end %>
+        </div>
+
 
         <!-- Delete button inside the <li> -->
         <%= link_to "Delete", group_path(group),
@@ -30,6 +45,7 @@
 <% else %>
   <p>No groups found.</p>
 <% end %>
+
 
 <p><strong>Progress:</strong></p>
 <div class="progress-stars" data-controller="progress-stars">
@@ -47,28 +63,42 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const stars = document.querySelectorAll('.progress-stars .star');
-  const checkmark21 = document.getElementById('checkmark-21');
-  stars.forEach((star, index) => {
-    star.addEventListener('click', function () {
-      const icon = star.querySelector('i');
-      star.classList.toggle('checked');
-      if (star.classList.contains('checked')) {
-        icon.classList.remove('fa-regular');
-        icon.classList.add('fa-solid');
-        icon.style.color = 'gold';
-      } else {
-        icon.classList.remove('fa-solid');
-        icon.classList.add('fa-regular');
-        icon.style.color = 'gray';
-      }
-      if (index === 20) {
-        checkmark21.style.color = star.classList.contains('checked') ? 'green' : 'gray';
-      }
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      star.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 500);
+  document.querySelectorAll('.progress-stars').forEach(progressDiv => {
+    const stars = progressDiv.querySelectorAll('.star');
+    const groupId = progressDiv.dataset.groupId;
+    const checkmark = document.getElementById('checkmark-21-' + groupId);
+
+    stars.forEach((star, index) => {
+      star.addEventListener('click', function () {
+        const icon = star.querySelector('i');
+        star.classList.toggle('checked');
+
+        if (star.classList.contains('checked')) {
+          icon.classList.remove('fa-regular');
+          icon.classList.add('fa-solid');
+          icon.style.color = 'gold';
+        } else {
+          icon.classList.remove('fa-solid');
+          icon.classList.add('fa-regular');
+          icon.style.color = 'gray';
+        }
+
+        if (index === 20) {
+          if (star.classList.contains('checked')) {
+            checkmark.style.color = 'green';
+          } else {
+            checkmark.style.color = 'gray';
+          }
+        }
+
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        star.appendChild(sparkle);
+
+        setTimeout(() => {
+          sparkle.remove();
+        }, 500);
+      });
     });
   });
 });
