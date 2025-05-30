@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
 end
 
 def show
-  @group = Group.find_by(id: params[:id])
+  @group = Group.find(params[:id])
   unless @group
     redirect_to groups_path, alert: "Group not found!" and return
   end
