@@ -21,6 +21,7 @@
             <em>No members yet.</em>
           <% end %>
       </li>
+      <%= link_to "Delete", group_path(group), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary d-inline float-right text-end", style: "width: fit-content;" %>
     <% end %>
   </ul>
 <% else %>
