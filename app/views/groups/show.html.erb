@@ -2,10 +2,19 @@
   <h2><%= @group.name %></h2>
   <p><strong>Members:</strong> <%= @group.members.count %></p>
 
-  <div class="form-actions">
+  <% if @group.goals.empty? %>
+<div class="form-actions">
+
     <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
   </div>
 
+   <% else %>
+   <h3>Goals:</h3>
+  <% @group.goals.each do |goal| %>
+
+  <%= goal.name %>
+   <% end %>
+   <% end %>
   <div class="form-actions">
     <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
   </div>
