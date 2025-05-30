@@ -1,6 +1,6 @@
 <h1>Create a New Group</h1>
 
-<%= form_with(model: @group, local: true) do |form| %>
+<%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
@@ -12,7 +12,7 @@
   </div>
 
   <div>
-    <%= link_to "Create New Group", groups_path, class: "btn btn-primary mb-3" %>
+   <%= form.submit "Create Group", class: "btn btn-primary mb-3" %>
   </div>
 <% end %>
 
