@@ -1,27 +1,46 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        LOGO
+      </div>
+      <div class="header-buttons">
+        <a href="#" class="sign-up-btn">SIGN UP</a>
+        <a href="#" class="login-btn">LOGIN</a>
+      </div>
+    </div>
+  </div>
+</header>
  <section class="FV">
         <div class="container">
             <div class="FV-content">
                 <div class="FV-title">
+                 <div class="FV-image">
+                    <%= image_tag "fv1.png", alt: "test" %>
+                </div>
+                
                     <h1>A New You in 21 Days.</h1>
                     <p>Build better habits together with friends and family.</p>
-                    <a href="#">Create a habit</a>
+                   <%= link_to "Let's start!", new_group_path, class: "btn-fv" %>
                 </div>
                 <div class="FV-image">
-                    <div class=""></div>
+                    <%= image_tag "fv2.png", alt: "test" %>
                 </div>
             </div>
         </div>
-    </section>
 
+    </section>
     <section class="intro">
         <div class="container">
             <div class="intro-content">
-                <div class="intro-text">
+                <div class="intro-left">
                     <p>It's hard to change alone.<br>But together, we can grow.</p>
                 </div>
+                  <div class="intro-image">
+                    <%= image_tag "intro.png", alt: "test" %>
+                </div>
                 <div class="intro-right">
-                    <div class=""></div>
-                    <p class="description-text">21days leader helps people support each other to build lasting habits one day at a time.</p>
+                    <p class="description-text">21days leader helps people support each other <br>to build lasting habits one day at a time.</p>
                 </div>
             </div>
         </div>
@@ -51,10 +70,12 @@
         <div class="container">
             <h2 class="how-title">How It Works</h2>
             <div class="how-content">
-                <div class="image-placeholder"></div>
+                <div class="how-image">
+                    <%= image_tag "howitworks.png", alt: "test" %>
+                </div>
                 <div>
                     <ul class="steps-list">
-                        <li><span class="step-number">1.</span> Choose your new habit (e.g., morning stretch for 5 minutes)</li>
+                        <li><span class="step-number">1.</span> Choose your new habit </li>
                         <li><span class="step-number">2.</span> Create a challenge and invite others</li>
                         <li><span class="step-number">3.</span> Complete it together for 21 days</li>
                         <li><span class="step-number">4.</span> Earn a badge and build momentum!</li>
@@ -85,16 +106,37 @@
         <div class="container">
             <h2 class="section-title">FAQ</h2>
             <div class="faq-item">
-                <div class="faq-question">• Is it free to use?</div>
+                <div class="faq-question"> Is it free to use?</div>
                 <div class="faq-answer">Yes! There's a free plan to get started.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">• Can I invite a group?</div>
+                <div class="faq-question"> Can I invite a group?</div>
                 <div class="faq-answer">Absolutely. Team up with as many friends or family as you like.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">• Can I choose any habit?</div>
+                <div class="faq-question"> Can I choose any habit?</div>
                 <div class="faq-answer">Yes! Whether it's exercise, mindfulness, or reducing screen time – it's up to you.</div>
             </div>
         </div>
     </section>
+
+    
+<footer>
+        <div class="container">
+            <div class="footer-nav">
+                <ul>
+                    <li> <%= link_to "Home", root_path %></li>
+                    <li>  <%= link_to "Sign up", new_user_session_path %></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p class="copyrighttext">&copy; 2025 - 21 days leter</p>
+        </div>
+    </footer>
