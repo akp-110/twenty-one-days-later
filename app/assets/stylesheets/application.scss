@@ -17,3 +17,9 @@ body {
   line-height: 1.6;
   color: #333;
 }
+input::placeholder, textarea::placeholder {
+  color: light rgb(224, 221, 221);
+  font-style: italic;
+  font-size: 13px;
+  opacity: 0.5;
+}
