@@ -26,11 +26,18 @@ class GroupsController < ApplicationController
     end
   end
 
+
   def show
     @group = Group.find_by(id: params[:id])
     unless @group
       redirect_to groups_path, alert: "Group not found!" and return
     end
+
+def show
+  @group = Group.find(params[:id])
+  unless @group
+    redirect_to groups_path, alert: "Group not found!" and return
+
   end
 
     def destroy
@@ -46,4 +53,4 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:name, user_emails: [])
   end
-end
+ end

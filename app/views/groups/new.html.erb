@@ -1,46 +1,45 @@
-<h1>Create a New Group</h1>
+<div class="form-container">
+  <h1>Create a New Group</h1>
 
-<%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= label_tag :user_emails, "Invite Members by Email" %><br>
-    <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control" %>
-  </div>
-
-  <div>
-   <%= form.submit "Create Group", class: "btn btn-primary mb-3" %>
-  </div>
-<% end %>
+  <%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
+    <br>
+    <div>
+      <%= label_tag :user_emails, "Invite Members by Email" %><br>
+      <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control" %>
+    </div>
+    <br>
+    <div>
+      <%= form.submit "Create New Group", class: "btn btn-primary mb-3" %>
+    </div>
+  <% end %>
+</div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const users = [
-      <% User.where.not(id: current_user.id).each do |user| %>
-        { email: "<%= user.email %>" },
-      <% end %>
-    ];
-
-     const select = document.getElementById("user-emails");
-
-    if (select && users.length > 0) {
-      users.forEach(user => {
-        const option = document.createElement("option");
-        option.value = user.email;
-        option.textContent = user.email;
-        select.appendChild(option);
-      });
-
-      new TomSelect("#user-emails", {
-        plugins: ['remove_button'],
-        create: false,
-        persist: false
-      });
-    } else {
-      console.warn("No users found to populate the dropdown.");
-    }
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const users = [
+    <% User.where.not(id: current_user.id).each do |user| %>
+      { email: "<%= user.email %>" },
+    <% end %>
+  ];
+  const select = document.getElementById("user-emails");
+  if (select && users.length > 0) {
+    users.forEach(user => {
+      const option = document.createElement("option");
+      option.value = user.email;
+      option.textContent = user.email;
+      select.appendChild(option);
+    });
+    new TomSelect("#user-emails", {
+      plugins: ['remove_button'],
+      create: false,
+      persist: false
+    });
+  } else {
+    console.warn("No users found to populate the dropdown.");
+  }
+});
 </script>
