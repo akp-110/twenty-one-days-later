@@ -1,20 +1,18 @@
 <% if user_signed_in? %>
-<div class="sidebar-wrapper">
+ <div class="sidebar-wrapper">
   <div data-toggle-navbar-target="sidebar" class="sidebar">
 
-      <div class="d-flex align-items-center justify-content-between p-3">
+       <div class="d-flex align-items-center justify-content-between p-3">
         <button class="closebtn" data-action="click->toggle-navbar#close">  &times; </button>
 
-        <div id="navbar_username"><strong><%= current_user.username %></strong></div>
+        <div id="navbar_username">
+        <strong><%= current_user.username %></strong>
+        </div>
          <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
       </div>
-
-
       <%= link_to new_group_path do %>
        <i class="fa-solid fa-square-plus"></i> New group
       <% end %>
-
-      <hr>
 
      <%= link_to groups_path do %>
         <i class="fa-solid fa-users"></i> Your community

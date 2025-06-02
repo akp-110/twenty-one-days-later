@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(name: group_params[:name], user: current_user)
     if @group.save
-      emails = group_params[:user_emails].reject(&:blank?)
+      emails = Array(group_params[:user_emails]).reject(&:blank?)
       users = User.where(email: emails)
       users.each do |user|
         @group.group_memberships.create(user: user)

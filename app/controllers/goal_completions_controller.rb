@@ -7,7 +7,7 @@ class GoalCompletionsController < ApplicationController
     completed = ActiveModel::Type::Boolean.new.cast(params[:completed])
     user = current_user
 
-    goal = @group.goals.first 
+    goal = @group.goals.first
 
     if completed
       GoalCompletion.find_or_create_by(user: user, goal: goal, date: goal.start_date + day.days)
@@ -23,7 +23,4 @@ class GoalCompletionsController < ApplicationController
   def set_group
     @group = Group.find(params[:group_id])
   end
-end
-
-
 end
