@@ -12,13 +12,31 @@
 		<% if group.members.any? %>
 			<ul style="list-style-type:none;">
 				<% group.members.each do |member| %>
-					<li>
-						<%= member.email %>
-					</li>
+					<li><%= member.email %></li>
 					<% end %>
 			</ul>
 			<% else %> <em>No members yet.</em>
 				<% end %>
+        <% if group.goals.present? %>
+      <p><strong>Goals:</strong></p>
+      <% group.goals.each do |goal| %>
+        <% days_left = (goal.end_date - Date.today).to_i if goal.end_date.present? %>
+        <% days_until_start = (goal.start_date - Date.today).to_i if goal.start_date.present? %>
+
+        <p><strong><%= goal.name %></strong></p>
+
+        <% if days_until_start.present? && days_until_start.positive? %>
+          <p>🚀 <strong><%= days_until_start %> days until this goal begins!</strong></p>
+        <% elsif days_left.present? && days_left.positive? %>
+          <p>⏳ <strong><%= days_left %> days left!</strong></p>
+        <% else %>
+          <p>✅ <strong>Goal deadline reached!</strong></p>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No goals set for this group yet.</p>
+    <% end %>
+
 					<%= link_to group_path(group),
               data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
               class: 'btn-delete' do %> <i class="fa-solid fa-trash"></i>

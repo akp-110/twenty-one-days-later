@@ -1,20 +1,31 @@
-<h1>sticker sheet!</h1>
+<h1>Sticker Sheet!</h1>
 
-<%# 
-<h1><%= @goal.name %></h1>
-<p><strong>Start Date:</strong> <%= @goal.start_date %></p>
-<p><strong>Reason:</strong> <%= @goal.reason %></p>
-<p><strong>Category:</strong> <%= @goal.category %></p>
+<% @group.goals.each do |goal| %>
+  <div class="goal-card">
+    <h2><%= goal.name %></h2>
+    <p><strong>Start Date:</strong> <%= goal.start_date.strftime("%d %b %Y") %></p>
 
-<h2>Progress (21 Days)</h2>
-<div id="stars-container" data-goal-id="<%= @goal.id %>">
-  <% (1..21).each do |day| %>
-    <% date = @goal.start_date + (day - 1).days %>
-    <% completed = @completed_dates.include?(date) %>
-    <span
-      class="star <%= 'completed' if completed %>"
-      data-date="<%= date %>">
-      ⭐
-    </span>
+    <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
+  <% if goal.start_date.present? && goal.start_date > Date.today %>
+    🚀 <strong><%= (goal.start_date - Date.today).to_i %> days until this goal starts!</strong>
+  <% elsif goal.end_date.present? %>
+    ⏳ <strong><%= (goal.end_date - Date.today).to_i %> days left!</strong>
+  <% else %>
+    ✅ <strong>Goal deadline reached!</strong>
   <% end %>
-</div> %>
+</p>
+
+    <h2>Progress (21 Days)</h2>
+    <div id="stars-container" data-goal-id="<%= goal.id %>">
+      <% (1..21).each do |day| %>
+        <% date = goal.start_date + (day - 1).days %>
+        <% completed = @completed_dates.include?(date) %>
+        <span
+          class="star <%= 'completed' if completed %>"
+          data-date="<%= date %>">
+          ⭐
+        </span>
+      <% end %>
+    </div>
+  </div>
+<% end %>

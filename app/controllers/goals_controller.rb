@@ -5,7 +5,6 @@ class GoalsController < ApplicationController
   def index
   end
 
-
   def new
      @group = current_user.groups.find(params[:group_id])
      @goal = @group.goals.build
@@ -27,7 +26,7 @@ class GoalsController < ApplicationController
 
 
     if @goal.save
-      redirect_to groups_path, notice: "Your goal is set! You can view all groups now."
+      redirect_to group_goal_path(@group, @goal), notice: "Your goal is set."
     else
       flash[:alert] = "Something went wrong. Please try again."
       redirect_to new_group_goal_path(@group)
