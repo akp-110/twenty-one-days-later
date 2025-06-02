@@ -11,7 +11,6 @@
     <% @group.goals.each do |goal| %>
       <div class="goal-container">
         <p><strong><%= goal.name %></strong></p>
-
         <p><strong>Start Date:</strong> <%= goal.start_date.present? ? goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
 
         <% if goal.start_date.present? %>
@@ -55,7 +54,7 @@
       </div>
     <% end %>
   <% end %>
-
+</div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function updateCountdown(elementId, endDateStr) {
@@ -102,4 +101,3 @@
       });
     });
   </script>
-</div>
