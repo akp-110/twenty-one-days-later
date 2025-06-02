@@ -1,0 +1,26 @@
+<div class="comments mt-3">
+  <% comments.each do |comment| %>
+    <div class="comment">
+
+      <div>
+        <h4><%= comment.user.username %></h4>
+        <p><%= comment.message %></p>
+        <p> <%= comment.likes %> likes </p>
+      </div>
+
+      <%= link_to comment_path(comment),
+        data: { turbo_method: :delete, turbo_confirm: "Delete this comment. Are you sure?" },
+        class: 'btn-delete' do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+
+      <%= link_to comment_path(comment), data: { turbo_method: :patch },
+        class: 'btn-delete', style:"color:rgb(13, 41, 253); border: none; background: none;" do %>
+        <i class="fa-solid fa-thumbs-up"></i>
+      <% end %>
+    </div>
+
+  <% end %>
+
+
+</div>

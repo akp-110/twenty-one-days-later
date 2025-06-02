@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "comments/create"
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,6 +18,10 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :new, :create, :show, :destroy] do
     resources :group_memberships, only: [:create]
     resources :goals, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :comments, only: [:create]
 
-end
+  end
+
+  resources :comments, only: [:destroy,:update]
+
 end
