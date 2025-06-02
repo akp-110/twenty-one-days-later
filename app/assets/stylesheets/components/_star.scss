@@ -1,6 +1,6 @@
 .star {
   position: relative;
-  font-size: 48px;   
+  font-size: 48px;
   width: 48px;
   height: 48px;
   text-align: center;
@@ -18,10 +18,10 @@
 .star-number {
   position: absolute;
   top: 50%;
-  left: 40%;                        
-  transform: translate(-50%, -50%);  
-  font-size: 16px;
-  color: grey;                 
+  left: 40%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: grey;
   font-weight: bold;
   pointer-events: none;
   line-height: 1;
