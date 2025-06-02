@@ -1,8 +1,9 @@
+<body class="landing-page">
 <header class="header">
   <div class="container">
     <div class="header-content">
       <div class="logo">
-        LOGO
+         <%= image_tag "logo.svg", alt: "test" %>
       </div>
       <div class="header-buttons">
             <%= link_to "SIGN UP!", new_user_registration_path, class: "sign-up-btn" %>
@@ -11,6 +12,7 @@
     </div>
   </div>
 </header>
+
  <section class="FV">
         <div class="container">
             <div class="FV-content">
@@ -140,3 +142,4 @@
             <p class="copyrighttext">&copy; 2025 - 21 days later</p>
         </div>
     </footer>
+</body>
