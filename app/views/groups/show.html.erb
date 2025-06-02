@@ -1,7 +1,8 @@
-<div class="group-container">
+  <div class="group-title">
   <h2><%= @group.name.titleize %></h2>
-  <p><strong>Members:</strong> <%= @group.members.count %></p>
-
+  </div>
+  <div class="group-show">
+  <hr>
   <% if @group.goals.empty? %>
     <div class="form-actions">
       <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
@@ -12,8 +13,13 @@
       <p><%= goal.name %></p>
     <% end %>
   <% end %>
+  <p><strong>Members:</strong> <%= @group.members.count %></p>
+
+
   <hr>
-  <h3>Member Progress</h3>
+  <div class="member-progress">
+  <h2>Member Progress</h2>
+  </div>
   <div class="member-cards">
     <% @group.members.each do |member| %>
     <br>
