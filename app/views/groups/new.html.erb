@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h1>Create a New Group</h1>
+  <h1>New Group</h1>
 
   <%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
     <div>
@@ -13,13 +13,13 @@
     </div>
     <br>
     <div>
-      <%= form.submit "Create New Group", class: "btn btn-primary mb-3" %>
+      <%= form.submit "We got this!", class: "btn btn-primary btn-custom" %>
     </div>
   <% end %>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const users = [
     <% User.where.not(id: current_user.id).each do |user| %>
       { email: "<%= user.email %>" },

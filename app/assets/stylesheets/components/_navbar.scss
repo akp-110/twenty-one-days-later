@@ -7,13 +7,14 @@
   position: fixed;
   height: 100%;
   overflow: auto;
-  border-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* Sidebar links */
 .sidebar a {
   display: block;
-  color: black;
+  color: white;
   padding: 16px;
   text-decoration: none;
   font-size: auto;
@@ -27,7 +28,7 @@
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: #555;
+  background-color: #1fec8c;
   color: white;
 }
 

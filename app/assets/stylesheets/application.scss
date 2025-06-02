@@ -23,3 +23,20 @@ input::placeholder, textarea::placeholder {
   font-size: 13px;
   opacity: 0.5;
 }
+
+
+.btn {
+  padding: 10px 24px;
+  background-color: #6247AA;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: 1px solid #6247AA;
+}
+
+.btn:hover {
+  background-color: #5a3e9e;
+}
