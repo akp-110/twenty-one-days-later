@@ -1,0 +1,15 @@
+
+
+.card-stats {
+  display: flex;
+  gap: 20px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  align-items: center;
+}
+
+.card-stats img {
+  height: 100%;
+  width: 160px;
+  object-fit: cover;
+}

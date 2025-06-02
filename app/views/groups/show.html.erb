@@ -3,33 +3,62 @@
   <p><strong>Members:</strong> <%= @group.members.count %></p>
 
   <% if @group.goals.empty? %>
-<div class="form-actions">
+    <div class="form-actions">
+      <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
+    </div>
+  <% else %>
+    <h3>Goals:</h3>
+    <% @group.goals.each do |goal| %>
+      <div class="goal-container">
+        <p><strong><%= goal.name %></strong></p>
+        <p><strong>Start Date:</strong> <%= goal.start_date.present? ? goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
 
-    <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
-  </div>
+        <% if goal.start_date.present? %>
+          <% days_until_start = (goal.start_date - Date.today).to_i %>
+          <% days_left = (goal.end_date - Date.today).to_i %>
 
-   <% else %>
-   <h3>Goals:</h3>
-  <% @group.goals.each do |goal| %>
+          <% if days_until_start.positive? %>
+            <p id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
+              🚀 <strong><%= days_until_start %> days until <%= goal.name %> begins!</strong>
+            </p>
+          <% elsif days_left.positive? %>
+            <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
+              ⏳ <strong><%= days_left %> days left!</strong>
+            </p>
+          <% else %>
+            <p>✅ <strong>Goal deadline reached!</strong></p>
+      <p><%= goal.name %></p>
+    <% end %>
 
-  <%= goal.name %>
-   <% end %>
-   <% end %>
-  <div class="form-actions">
+  <hr>
+  <h3>Member Progress</h3>
+  <div class="member-cards">
+    <% @group.members.each do |member| %>
+    <br>
+    <h4><%= member.first_name %></h4>
+    <hr>
+      <div class="card-stats">
 
-   <div class ="card-stats">
-        <p><strong>Progress:</strong></p>
+
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
+
         <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
           <% 21.times do |i| %>
             <span class="star" data-day="<%= i %>">
               <i class="fa-regular fa-star"></i>
               <span class="star-number"><%= i + 1 %></span>
             </span>
+
             <% if i == 20 %>
               <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle" style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
             <% end %>
           <% end %>
+        <% end %>
+
+        <div class="card-stats">
+          <%= link_to "Edit", edit_group_goal_path(goal.group, goal), class: "btn btn-primary" %>
         </div>
+
          </div>
   </div>
 </div>
@@ -65,6 +94,85 @@
         </div>
       <% end %>
     </div>
+
+
+        <!-- 🚀 Sticker Sheet (Progress Tracker) -->
+        <div class="card-stats">
+          <p><strong>Progress:</strong></p>
+          <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
+            <% 21.times do |i| %>
+              <span class="star" data-day="<%= i %>">
+                <i class="fa-regular fa-star"></i>
+                <span class="star-number"><%= i + 1 %></span>
+              </span>
+              <% if i == 20 %>
+                <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle"
+                   style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<br>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function updateCountdown(elementId, endDateStr) {
+        const countdownElement = document.getElementById(elementId);
+        if (!countdownElement) return;
+
+        const endDate = new Date(endDateStr).getTime();
+        const now = new Date().getTime();
+        const difference = endDate - now;
+        const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        countdownElement.innerText =
+          daysLeft > 0 ? `⏳ ${daysLeft} days left!` : "✅ Goal deadline reached!";
+      }
+
+      document.querySelectorAll("[id^='pre-start-countdown-']").forEach(preStartCountdown => {
+        const startDateStr = preStartCountdown.dataset.startDate;
+        if (!startDateStr) return;
+
+        const startDate = new Date(startDateStr).getTime();
+
+        setInterval(() => {
+          const today = new Date().getTime();
+          const difference = startDate - today;
+          const daysUntilStart = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+          preStartCountdown.innerText = `🚀 ${daysUntilStart} days until the goal begins!`;
+
+          if (daysUntilStart <= 0) {
+            preStartCountdown.style.display = "none"; // Hide pre-start message
+            const countdownElement = document.getElementById(`countdown-${preStartCountdown.id.replace("pre-start-countdown-", "")}`);
+            if (countdownElement) {
+              countdownElement.style.display = "block"; // Show the countdown when the goal starts
+              updateCountdown(countdownElement.id, countdownElement.dataset.endDate);
+              setInterval(() => updateCountdown(countdownElement.id, countdownElement.dataset.endDate), 1000);
+            }
+          }
+        }, 1000);
+      });
+
+      document.querySelectorAll("[id^='countdown-']").forEach(countdown => {
+        updateCountdown(countdown.id, countdown.dataset.endDate);
+        setInterval(() => updateCountdown(countdown.id, countdown.dataset.endDate), 1000);
+      });
+    });
+  </script>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-actions mt-4">
+    <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
+
   </div>
 </div>
 

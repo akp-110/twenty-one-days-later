@@ -4,7 +4,73 @@
 
 <p><strong>Start Date:</strong> <%= @goal.start_date.present? ? @goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
 
+<% if @goal.start_date.present? %>
+  <% days_until_start = (@goal.start_date - Date.today).to_i %>
+
+  <% if days_until_start.positive? %>
+    <p id="pre-start-countdown" data-start-date="<%= @goal.start_date %>">
+      🚀 <strong><%= days_until_start %> days until <%= @goal.name %> begins!</strong>
+    </p>
+  <% else %>
+    <% days_left = (@goal.end_date - Date.today).to_i %>
+
+    <% if days_left.positive? %>
+      <p id="countdown" data-end-date="<%= @goal.end_date %>">
+        ⏳ <strong><%= days_left %> days left!</strong>
+      </p>
+    <% else %>
+      <p>✅ <strong>Goal deadline reached!</strong></p>
+    <% end %>
+  <% end %>
+<% end %>
+
 <div class="form-action">
-<%= link_to "Back to Goals", group_goals_path(@goal.group), class: "btn btn-secondary" %>
+<%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
 </div>
+
+<script>
+  function updateCountdown(elementId, endDateStr) {
+    const countdownElement = document.getElementById(elementId);
+    if (!countdownElement) return;
+
+    const endDate = new Date(endDateStr).getTime();
+    const now = new Date().getTime();
+    const difference = endDate - now;
+    const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+    countdownElement.innerText =
+      daysLeft > 0 ? `⏳ ${daysLeft} days left!` : "✅ Goal deadline reached!";
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const countdownElement = document.getElementById("countdown");
+  const preStartCountdownElement = document.getElementById("pre-start-countdown");
+
+  if (preStartCountdownElement) {
+    const startDateStr = preStartCountdownElement.dataset.startDate;
+    const startDate = new Date(startDateStr).getTime();
+
+    setInterval(() => {
+      const today = new Date().getTime();
+      const difference = startDate - today;
+      const daysUntilStart = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+      preStartCountdownElement.innerText = `🚀 ${daysUntilStart} days until the goal begins!`;
+
+      if (daysUntilStart <= 0) {
+        preStartCountdownElement.style.display = "none"; // Hide pre-start message when goal starts
+        if (countdownElement) {
+          updateCountdown("countdown", countdownElement.dataset.endDate);
+        }
+      }
+    }, 1000); // Updates every second
+  }
+
+  if (countdownElement) {
+    updateCountdown("countdown", countdownElement.dataset.endDate);
+    setInterval(() => updateCountdown("countdown", countdownElement.dataset.endDate), 1000);
+  }
+});
+
+</script>
 </div>
