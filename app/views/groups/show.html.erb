@@ -1,8 +1,10 @@
-  <div class="group-title">
+<div class="group-title">
   <h2><%= @group.name.titleize %></h2>
-  </div>
-  <div class="group-show">
+</div>
+
+<div class="group-show">
   <hr>
+
   <% if @group.goals.empty? %>
     <div class="form-actions">
       <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
@@ -13,22 +15,22 @@
       <p><%= goal.name %></p>
     <% end %>
   <% end %>
+
   <p><strong>Members:</strong> <%= @group.members.count %></p>
-
-
   <hr>
+
   <div class="member-progress">
-  <h2>Member Progress</h2>
+    <h2>Member Progress</h2>
   </div>
+
   <div class="member-cards">
     <% @group.members.each do |member| %>
-    <br>
-    <h4><%= member.first_name %></h4>
-    <hr>
+      <br>
+      <h4><%= member.first_name %></h4>
+      <hr>
+
       <div class="card-stats">
-
-
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image" />
 
         <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
           <% 21.times do |i| %>
