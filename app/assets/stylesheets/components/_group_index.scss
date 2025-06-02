@@ -1,4 +1,3 @@
-
 body {
   font-family: 'Arial', sans-serif;
   background-color: #ffffff;
@@ -15,11 +14,11 @@ body {
   border-radius: 20px;
 }
 
-
 .cards-background {
-  padding: 10px 50px;
-  margin: 20px 0;
+    padding: 10px 70px;
+    margin: 20px 0;
 }
+
 
 .cards-home h1 {
   font-size: 2.5rem;
@@ -34,13 +33,11 @@ body {
   margin-bottom: 2rem;
 }
 
-
 .cards {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
-
 
 .card {
   background-color: white;
@@ -50,7 +47,6 @@ body {
   position: relative;
   width: 100%;
 }
-
 
 .card h3 {
   background-color: #5544C4;
@@ -70,18 +66,18 @@ body {
 }
 
 .card-content {
-  padding: 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 20px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-template-rows: auto auto;
+  gap: 15px;
+  min-height: 0; 
 }
 
 .start-date-section {
-  flex: 1;
   background-color: #f4f3f9;
   border-radius: 10px;
-  padding: 20px;
+  padding: 12px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,14 +89,46 @@ body {
 }
 
 .members-section {
-  flex: 1;
   background-color: #f4f3f9;
   border-radius: 10px; 
-  padding: 20px; 
+  padding: 12px 15px;
+}
+
+.challenge-section {
+  background-color: #f4f3f9;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reason-section {
+  background-color: #f4f3f9;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.challenge-section h4,
+.reason-section h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.challenge-section p,
+.reason-section p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
 }
 
 .card p {
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   font-size: 16px;
 }
 
@@ -113,13 +141,14 @@ body {
 }
 
 .card ul {
-  margin: 8px 0 0 0;
+  margin: 5px 0 0 0;
   padding: 0;
 }
 
 .card li {
   color: #555;
   font-size: 16px;
+  margin-bottom: 3px;
 }
 
 .card li:last-child {
@@ -160,17 +189,19 @@ body {
   }
   
   .card-content {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 15px;
+  padding: 25PX;
   }
   
   .start-date-section,
-  .members-section {
-    flex: none;
+  .members-section,
+  .challenge-section,
+  .reason-section {
     width: 100%;
-    padding: 18px;
- }
+    padding: 12px;
+  }
   
   .card h3 {
     padding: 18px 20px;
@@ -184,15 +215,17 @@ body {
 
 @media (max-width: 480px) {
   .cards-background {
-    padding: 20px;
+    padding: 15px;
   }
   
   .card-content {
-    padding: 18px;
+    padding: 12px;
   }
   
   .start-date-section,
-  .members-section {
-    padding: 15px;
+  .members-section,
+  .challenge-section,
+  .reason-section {
+    padding: 10px;
   }
 }

@@ -301,10 +301,6 @@ body {
   color: #6247AA;
 }
 
-.reviews-section {
-
-}
-
 .section-title {
   text-align: center;
   font-size: 36px;
@@ -384,13 +380,14 @@ body {
 }
 footer {
     background-color: #505050;
-    padding: 30px 0 10px;
+  padding: 10px 0;
     margin-top: 50px;
 }
 
 .footer-nav ul {
     display: flex;
     list-style: none;
+    margin-bottom: 5px;
 }
 
 .footer-nav ul li {
@@ -405,7 +402,7 @@ footer {
 .social-icons {
     display: flex;
     justify-content: flex-end;
-    margin: 20px 0;
+    margin: 0 0 5px;
 }
 
 .social-icons a {
@@ -417,11 +414,12 @@ footer {
 .copyright {
     color: white;
     text-align: center;
-    padding-top: 20px;
+    align-items: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
+    font-size: 12px;
 }
 
 .copyrighttext{
     color: white;
+    margin: 5px 0 0 0;
 }
