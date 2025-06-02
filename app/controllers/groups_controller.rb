@@ -29,6 +29,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find_by(id: params[:id])
+    @goal = @group.goals.first # ✅ Load the first goal for the countdown
     unless @group
       redirect_to groups_path, alert: "Group not found!" and return
     end
