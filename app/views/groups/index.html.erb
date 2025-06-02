@@ -1,32 +1,52 @@
-<div class="cards-home">
-<h1>My Groups</h1>
-<p>You are in
-	<%= @groups.count %> groups.</p>
-<% if @groups.any? %>
+<br>
+<br>
 
-<div class="cards">
-	<% @groups.each do |group| %>
-  <div class="card">
-		<h3><%= link_to group.name.titleize, group_path(group) %></h3>
-		<p><strong>Members:</strong></p>
-		<% if group.members.any? %>
-			<ul style="list-style-type:none;">
-				<% group.members.each do |member| %>
-					<li>
-						<%= member.email %>
-					</li>
-					<% end %>
-			</ul>
-			<% else %> <em>No members yet.</em>
-				<% end %>
-					<%= link_to group_path(group),
-              data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
-              class: 'btn-delete' do %> <i class="fa-solid fa-trash"></i>
-						<% end %>
-             </div>
-							<% end %>
+<div class="cards-home">
+  <h1>My Groups</h1>
+  <p>You are in <%= @groups.count %> groups.</p>
+
+  <% if @groups.any? %>
+    <div class="cards-background">
+    <div class="cards">
+      <% @groups.sort_by { |group| group.goals.first&.start_date || Date.new(3000, 1, 1) }.each do |group| %>
+        <div class="card">
+          <h3>
+            <%= link_to group.name.titleize, group_path(group) %>
+            <%= link_to group_path(group),
+                        data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
+                        class: 'btn-delete' do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </h3>
+            
+            <div class="card-content">
+              <div class="start-date-section">
+                <% if group.goals.first&.start_date.present? %>
+                  <p><strong>Start date:</strong> <br>
+				    <span style="color:#555;"><%= group.goals.first.start_date.strftime("%B %d, %Y") %></p></span>
+                <% end %>
               </div>
-								<% else %>
-									<p>No groups found.</p>
-									<% end %>
-                  </div>
+              
+              <div class="members-section">
+                <p><strong>Members:</strong></p>
+                <% if group.members.any? %>
+                  <ul style="list-style-type:none;">
+                    <% group.members.each do |member| %>
+                      <li><%= member.email %></li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <em>No members yet.</em>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="cards-background">
+      <p>No groups found.</p>
+    </div>
+  <% end %>
+</div>
