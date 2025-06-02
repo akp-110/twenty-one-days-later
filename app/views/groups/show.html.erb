@@ -27,6 +27,31 @@
             </p>
           <% else %>
             <p>✅ <strong>Goal deadline reached!</strong></p>
+      <p><%= goal.name %></p>
+    <% end %>
+  <% end %>
+  <hr>
+  <h3>Member Progress</h3>
+  <div class="member-cards">
+    <% @group.members.each do |member| %>
+    <br>
+    <h4><%= member.first_name %></h4>
+    <hr>
+      <div class="card-stats">
+
+
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
+
+        <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
+          <% 21.times do |i| %>
+            <span class="star" data-day="<%= i %>">
+              <i class="fa-regular fa-star"></i>
+              <span class="star-number"><%= i + 1 %></span>
+            </span>
+
+            <% if i == 20 %>
+              <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle" style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
+            <% end %>
           <% end %>
         <% end %>
 
@@ -103,3 +128,12 @@
       });
     });
   </script>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-actions mt-4">
+    <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
+  </div>
+</div>

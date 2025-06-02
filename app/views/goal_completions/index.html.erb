@@ -4,6 +4,11 @@
   <div class="goal-card">
     <h2><%= goal.name %></h2>
     <p><strong>Start Date:</strong> <%= goal.start_date.strftime("%d %b %Y") %></p>
+<%#
+<h1><%= @goal.name %></h1>
+<p><strong>Start Date:</strong> <%= @goal.start_date %></p>
+<p><strong>Reason:</strong> <%= @goal.reason %></p>
+<p><strong>Category:</strong> <%= @goal.category %></p>
 
     <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
   <% if goal.start_date.present? && goal.start_date > Date.today %>
@@ -29,3 +34,4 @@
     </div>
   </div>
 <% end %>
+</div>
