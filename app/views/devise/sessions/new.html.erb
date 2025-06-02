@@ -1,5 +1,9 @@
-<%= link_to "back", root_path %>
+
+
 <div class= form-container>
+<%= link_to root_path, class:"back-btn" do %>
+  <i class="fas fa-arrow-left"></i> Back
+<% end %>
 <h2>LOGIN</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
