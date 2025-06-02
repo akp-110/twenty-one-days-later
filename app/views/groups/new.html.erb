@@ -1,17 +1,18 @@
+
+<br>
+<br>
 <div class="form-container">
   <h1>New Group</h1>
 
   <%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
     <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
+      <%= form.label :name %>
+      <%= form.text_field :name, placeholder: "Smith family"%>
     </div>
-    <br>
     <div>
-      <%= label_tag :user_emails, "Invite Members by Email" %><br>
-      <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control" %>
+      <%= label_tag :user_emails, "Invite Members by Email" %>
+      <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control", placeholder: "sam.smith@gmail.com" %>
     </div>
-    <br>
     <div>
       <%= form.submit "We got this!", class: "btn btn-primary btn-custom" %>
     </div>
@@ -43,3 +44,6 @@ document.addEventListener("turbo:load", () => {
   }
 });
 </script>
+
+<br>
+<br>

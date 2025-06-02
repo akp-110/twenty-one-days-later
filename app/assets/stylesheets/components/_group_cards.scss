@@ -37,8 +37,22 @@
 //   margin: auto;
 // }
 
+
+.btn-delete{
+  right: 20px;
+  top: 10px;
+}
+
+.comment{
+  display: flex;
+  justify-content: flex-start;
+  padding: 12px;
+  gap: 12px;
+}
+
 // .btn-delete{
 //   position: absolute;
 //   right: 20px;
 //   top: 10px;
 // }
+
