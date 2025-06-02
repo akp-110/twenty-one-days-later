@@ -32,13 +32,32 @@ label {
   background-color: #5a3e9e;
 }
 }
+.back-btn {
+  position: fixed;
+  top:20px;
+  right:20px;
+  padding: 10px 24px;
+  background-color: #6247AA;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: 1px solid #6247AA;
+}
+
+.back-btn:hover {
+  background-color: #5a3e9e;
+}
 
 
 .form-container{
   max-width: 500px;
-  margin: center;
+  margin-left:  200px;
   text-align: center;
-  background: rgba(193, 182, 248, 0.5);
+  background-color: rgba(193, 182, 248, 0.5);
   border-radius: 20px;
   padding: 50px;
 }
