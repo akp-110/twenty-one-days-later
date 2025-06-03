@@ -170,10 +170,9 @@
     </div>
     </div>
 
+        <%# <%= render "comments/comments_list", comments: @comments %>
 
-        <%= render "comments/comments_list", comments: @comments %>
-
-
+<%#
   <script>
     document.addEventListener("turbo:load", function () {
       function updateCountdown(elementId, endDateStr) {
@@ -193,7 +192,7 @@
         const startDateStr = preStartCountdown.dataset.startDate;
         if (!startDateStr) return;
 
-        const startDate = new Date(startDateStr).getTime();
+        const startDate = new Date(startDateStr).getTime(); %> %>
 
 
 
