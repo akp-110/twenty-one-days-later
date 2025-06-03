@@ -1,0 +1,33 @@
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-like, .btn-delete {
+  border: none;
+  background: none;
+  font-size: 18px;
+}
+
+.btn-like {
+  color: rgb(13, 41, 253);
+}
+
+.btn-delete {
+  color: #dc3545;
+}

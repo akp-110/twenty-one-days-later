@@ -11,10 +11,13 @@
 </div>
 
       <div class="nav-links">
-        <div id="navbar_username">
-        <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-       <strong><%= current_user.username %></strong>
+        <div id="navbar_username" style="display: flex; align-items: center; gap: 40px;">
+      <% if current_user&.photo&.attached? %>
+         <%= cl_image_tag current_user.photo.key, class: "avatar-bordered", alt: "avatar", height: 40, width: 40, crop: :fill %>
+        <% end %>
+        <strong><%= current_user.username %></strong>
       </div>
+
 
       <%= link_to new_group_path, class: "#{'active' if current_page?(new_group_path)}" do %>
         <i class="fa-solid fa-square-plus"></i> New Group

@@ -1,81 +1,151 @@
-  <div class="group-title">
-  <h2><%= @group.name.titleize %></h2>
+<br>
+<br>
+
+<div class="content-wrapper">
+ <div class="main-header-container">
+  <div class="header-flex-container">
+    <div class="group-title">
+      <h1><%= @group.name.titleize %></h1>
+    </div>
+    
+    <div class="progress-indicators">
+      <%= image_tag "user.png", alt: "test" %>
+      <%= image_tag "user.png", alt: "test" %>
+      <%= image_tag "user.png", alt: "test" %>
+      <%= image_tag "user.png", alt: "test" %>
+    </div>
   </div>
-  <div class="group-show">
-  <hr>
+  
+
+   <% if @group.goals.present? %>
+    <% goal = @group.goals.first %>
+    <%= link_to edit_group_goal_path(goal.group, goal), class: "edit-icon-link" do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+  <% end %>
+    
+  <div class="goal-info">
+    <div class="info-box">
+      <span>Start date: <%= @group.goals.first&.start_date&.strftime("%m/%d/%Y") || "Not set" %></span>
+    </div>
+    <div class="info-box">
+      <span>Challenge: <%= @group.goals.first&.name || "No goal set" %></span>
+    </div>
+  </div>
+    
+  <% if @group.goals.present? %>
+    <% goal = @group.goals.first %>
+    <% if goal.start_date.present? %>
+      <% days_until_start = (goal.start_date - Date.today).to_i %>
+      <% if days_until_start.positive? %>
+        <p class="countdown-message" id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
+          🚀 <strong><%= days_until_start %> days until the goal begins!</strong>
+        </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="group-show">
   <% if @group.goals.empty? %>
     <div class="form-actions">
       <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
     </div>
   <% else %>
-    <h3>Goals:</h3>
-    <% @group.goals.each do |goal| %>
-      <div class="goal-container">
-        <p><strong><%= goal.name %></strong></p>
-
+    <div class="goals-section" style="display: none;">
+      <h3>Goals:</h3>
+      <% @group.goals.each do |goal| %>
+        <div class="goal-container">
+          <p><strong><%= goal.name %></strong></p>
           <%= link_to "Edit", edit_group_goal_path(goal.group, goal), class: "btn" %>
+          <p><strong>Start Date:</strong> <%= goal.start_date.present? ? goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
+          
+          <% if goal.start_date.present? %>
+            <% days_until_start = (goal.start_date - Date.today).to_i %>
+            <% days_left = (goal.end_date - Date.today).to_i %>
 
-        <p><strong>Start Date:</strong> <%= goal.start_date.present? ? goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
-
-        <% if goal.start_date.present? %>
-          <% days_until_start = (goal.start_date - Date.today).to_i %>
-          <% days_left = (goal.end_date - Date.today).to_i %>
-
-          <% if days_until_start.positive? %>
-            <p id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
-              🚀 <strong><%= days_until_start %> days until <%= goal.name %> begins!</strong>
-            </p>
-          <% elsif days_left.positive? %>
-            <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
-              ⏳ <strong><%= days_left %> days left!</strong>
-            </p>
-          <% else %>
-            <p>✅ <strong>Goal deadline reached!</strong></p>
+            <% if days_until_start.positive? %>
+              <p id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
+                🚀 <strong><%= days_until_start %> days until <%= goal.name %> begins!</strong>
+              </p>
+            <% elsif days_left.positive? %>
+              <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
+                ⏳ <strong><%= days_left %> days left!</strong>
+              </p>
+            <% else %>
+              <p>✅ <strong>Goal deadline reached!</strong></p>
             <% end %>
           <% else %>
             <p><em>Start date not set for this goal.</em></p>
-        <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="member-progress-header">
+    <h2>Member Progress</h2>
+  </div>
+
+  <div class="members-container">
+    <% @group.members.each do |member| %>
+      <div class="member-row">
+        <div class="member-info">
+          <div class="img-box">
+            <% if member.photo.attached? %>
+            <%= cl_image_tag member.photo.key, class: ".avatar-square", alt: "avatar", height: 100, width: 100, crop: :fill %>
+            <% else %>
+             <%= image_tag "default-avatar.svg", class: "avatar-square", alt: "avatar", height: 100, width: 100 %>
+              <% end %>
+          </div>
+          <h4><%= member.first_name %></h4>
+        </div>
+        
+        <div class="member-card">
+          <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
+            <div class="stars-row">
+              <% 11.times do |i| %>
+                <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
+                  <i class="fa-regular fa-star"></i>
+                </span>
+              <% end %>
+            </div>
+            <div class="stars-row">
+              <% 10.times do |i| %>
+                <span class="star" data-progress-stars-target="star" data-day="<%= i + 11 %>">
+                  <i class="fa-regular fa-star"></i>
+                </span>
+              <% end %>
+              <i id="checkmark-21-<%= @group.id %>" class="fas fa-check-circle"></i>
+                  <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+             <i class="fas fa-comment-alt"></i>
+            </button>
+            </div>
+         
+          </div>
+          
+          <%# <div class="member-actions">
+            <span class="days-left">20 more days left</span>
+            
+          </div> %>
+        </div>
       </div>
     <% end %>
-  <% end %>
-  <p><strong>Members:</strong> <%= @group.members.count %></p>
-  <hr>
+  </div>
 
-  <h2>Member Progress</h2>
+  <p style="display: none;"><strong>Members:</strong> <%= @group.members.count %></p>
 
 
+  <div class="member-progress-header">
+    <h2>Comments</h2>
+  </div>
 
-    <% @group.members.each do |member| %>
 
+  <div class="members-container">
+    <%= render "comments/comments_list", comments: @comments %>
+  </div>
+</div>
 
-    <h4><%= member.first_name %></h4>
-    <div class="member-card">
-    <div class = "img-box">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
-    </div>
-        <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
-          <% 21.times do |i| %>
-            <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
-              <i class="fa-regular fa-star"></i>
-              <span class="star-number"><%= i + 1 %></span>
-            </span>
-            <% if i == 20 %>
-              <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle" style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
-            <% end %>
-          <% end %>
-          </div>
-    </div>
-
-<% end %>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Leave a comment
-</button>
-
-<hr>
-<h5 class="mt-3">Comments</h5>
- <hr>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -86,11 +156,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
-        <%= f.input :message, label_html: { class: "d-none" }, placeholder: "Comment here...", class: "review" %>
-
+          <%= f.input :message, label_html: { class: "d-none" }, placeholder: "Comment here...", class: "review" %>
         </div>
         <div class="modal-footer">
+
         <%= f.button :submit, value:"Add a comment", class: "btn" %>
         </div>
       <% end %>
@@ -139,13 +208,58 @@
               updateCountdown(countdownElement.id, countdownElement.dataset.endDate);
               setInterval(() => updateCountdown(countdownElement.id, countdownElement.dataset.endDate), 1000);
             }
-          }
-        }, 1000);
-      });
 
-      document.querySelectorAll("[id^='countdown-']").forEach(countdown => {
-        updateCountdown(countdown.id, countdown.dataset.endDate);
-        setInterval(() => updateCountdown(countdown.id, countdown.dataset.endDate), 1000);
-      });
+          <%= f.button :submit, class: "btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function () {
+    function updateCountdown(elementId, endDateStr) {
+      const countdownElement = document.getElementById(elementId);
+      if (!countdownElement) return;
+
+      const endDate = new Date(endDateStr).getTime();
+      const now = new Date().getTime();
+      const difference = endDate - now;
+      const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+      countdownElement.innerText =
+        daysLeft > 0 ? `⏳ ${daysLeft} days left!` : "✅ Goal deadline reached!";
+    }
+
+    document.querySelectorAll("[id^='pre-start-countdown-']").forEach(preStartCountdown => {
+      const startDateStr = preStartCountdown.dataset.startDate;
+      if (!startDateStr) return;
+
+      const startDate = new Date(startDateStr).getTime();
+
+      setInterval(() => {
+        const today = new Date().getTime();
+        const difference = startDate - today;
+        const daysUntilStart = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        preStartCountdown.innerText = `🚀 ${daysUntilStart} days until the goal begins!`;
+
+        if (daysUntilStart <= 0) {
+          preStartCountdown.style.display = "none";
+          const countdownElement = document.getElementById(`countdown-${preStartCountdown.id.replace("pre-start-countdown-", "")}`);
+          if (countdownElement) {
+            countdownElement.style.display = "block";
+            updateCountdown(countdownElement.id, countdownElement.dataset.endDate);
+            setInterval(() => updateCountdown(countdownElement.id, countdownElement.dataset.endDate), 1000);
+
+          }
+        }
+      }, 1000);
     });
-  </script>
+
+    document.querySelectorAll("[id^='countdown-']").forEach(countdown => {
+      updateCountdown(countdown.id, countdown.dataset.endDate);
+      setInterval(() => updateCountdown(countdown.id, countdown.dataset.endDate), 1000);
+    });
+  });
+</script>
