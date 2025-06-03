@@ -1,37 +1,185 @@
-<div class="group-container">
+  <div class="group-title">
   <h2><%= @group.name.titleize %></h2>
+  </div>
+  <div class="group-show">
+  <hr>
+  <% if @group.goals.empty? %>
+    <div class="form-actions">
+      <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
+    </div>
+  <% else %>
+    <h3>Goals:</h3>
+    <% @group.goals.each do |goal| %>
+      <div class="goal-container">
+        <p><strong><%= goal.name %></strong></p>
+        <p><strong>Start Date:</strong> <%= goal.start_date.present? ? goal.start_date.strftime("%d %b %Y") : "Not set" %></p>
+
+        <% if goal.start_date.present? %>
+          <% days_until_start = (goal.start_date - Date.today).to_i %>
+          <% days_left = (goal.end_date - Date.today).to_i %>
+
+          <% if days_until_start.positive? %>
+            <p id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
+              🚀 <strong><%= days_until_start %> days until <%= goal.name %> begins!</strong>
+            </p>
+          <% elsif days_left.positive? %>
+            <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
+              ⏳ <strong><%= days_left %> days left!</strong>
+            </p>
+          <% else %>
+            <p>✅ <strong>Goal deadline reached!</strong></p>
+      <p><%= goal.name %></p>
+    <% end %>
+  <% end %>
   <p><strong>Members:</strong> <%= @group.members.count %></p>
 
-  <% if @group.goals.empty? %>
-<div class="form-actions">
 
-    <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
+  <hr>
+  <div class="member-progress">
+  <h2>Member Progress</h2>
   </div>
+  <div class="member-cards">
+    <% @group.members.each do |member| %>
+    <br>
+    <h4><%= member.first_name %></h4>
+    <hr>
+      <div class="card-stats">
 
-   <% else %>
-   <h3>Goals:</h3>
-  <% @group.goals.each do |goal| %>
 
-  <%= goal.name %>
-   <% end %>
-   <% end %>
-  <div class="form-actions">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
 
-   <div class ="card-stats">
-        <p><strong>Progress:</strong></p>
         <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
           <% 21.times do |i| %>
             <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
               <i class="fa-regular fa-star"></i>
               <span class="star-number"><%= i + 1 %></span>
             </span>
+
             <% if i == 20 %>
               <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle" style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
             <% end %>
           <% end %>
-        </div>
-         </div>
+        <% end %>
 
-    <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
+        <div class="card-stats">
+          <%= link_to "Edit", edit_group_goal_path(goal.group, goal), class: "btn btn-primary" %>
+        </div>
+
+         </div>
   </div>
 </div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button mb-3" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Leave a comment
+</button>
+
+<hr>
+<h5 class="mt-3">Comments</h5>
+ <hr>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= simple_form_for [@group, @comment] do |f| %>
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Comment</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        <%= f.input :message, label_html: { class: "d-none" }, placeholder: "Comment here...", class: "review" %>
+
+        </div>
+        <div class="modal-footer">
+        <%= f.button :submit, class: "btn btn-primary" %>
+
+
+        </div>
+      <% end %>
+    </div>
+
+
+        <!-- 🚀 Sticker Sheet (Progress Tracker) -->
+        <div class="card-stats">
+          <p><strong>Progress:</strong></p>
+          <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
+            <% 21.times do |i| %>
+              <span class="star" data-day="<%= i %>">
+                <i class="fa-regular fa-star"></i>
+                <span class="star-number"><%= i + 1 %></span>
+              </span>
+              <% if i == 20 %>
+                <i id="checkmark-21-<%= @group.id %>" class="fa-solid fa-check-circle"
+                   style="color: gray; font-size: 32px; vertical-align: middle; margin-left: 8px;"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<br>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function updateCountdown(elementId, endDateStr) {
+        const countdownElement = document.getElementById(elementId);
+        if (!countdownElement) return;
+
+        const endDate = new Date(endDateStr).getTime();
+        const now = new Date().getTime();
+        const difference = endDate - now;
+        const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        countdownElement.innerText =
+          daysLeft > 0 ? `⏳ ${daysLeft} days left!` : "✅ Goal deadline reached!";
+      }
+
+      document.querySelectorAll("[id^='pre-start-countdown-']").forEach(preStartCountdown => {
+        const startDateStr = preStartCountdown.dataset.startDate;
+        if (!startDateStr) return;
+
+        const startDate = new Date(startDateStr).getTime();
+
+        setInterval(() => {
+          const today = new Date().getTime();
+          const difference = startDate - today;
+          const daysUntilStart = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+          preStartCountdown.innerText = `🚀 ${daysUntilStart} days until the goal begins!`;
+
+          if (daysUntilStart <= 0) {
+            preStartCountdown.style.display = "none"; // Hide pre-start message
+            const countdownElement = document.getElementById(`countdown-${preStartCountdown.id.replace("pre-start-countdown-", "")}`);
+            if (countdownElement) {
+              countdownElement.style.display = "block"; // Show the countdown when the goal starts
+              updateCountdown(countdownElement.id, countdownElement.dataset.endDate);
+              setInterval(() => updateCountdown(countdownElement.id, countdownElement.dataset.endDate), 1000);
+            }
+          }
+        }, 1000);
+      });
+
+      document.querySelectorAll("[id^='countdown-']").forEach(countdown => {
+        updateCountdown(countdown.id, countdown.dataset.endDate);
+        setInterval(() => updateCountdown(countdown.id, countdown.dataset.endDate), 1000);
+      });
+    });
+  </script>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-actions mt-4">
+    <%= link_to "Back to Groups", groups_path, class: "btn btn-secondary" %>
+
+  </div>
+</div>
+
+<%= render "comments/comments_list", comments: @comments %>

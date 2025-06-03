@@ -8,4 +8,8 @@ eagerLoadControllersFrom("controllers", application)
 //import ProgressStarsController from "./progress_stars_controller"
 
 //const application = Application.start()
+
 //application.register("progress-stars", ProgressStarsController)
+
+
+

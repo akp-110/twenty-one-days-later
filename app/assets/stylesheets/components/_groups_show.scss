@@ -1,0 +1,35 @@
+.group-title{
+  text-align: center;
+}
+.group-show{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 10px;
+  background-color: #F5F3FF;
+  border-radius: 20px;
+}
+.group-show h2{
+  background-color: #5544C4;
+  color: white;
+  margin: 0;
+  padding: 20px 25px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.card-stats {
+  display: flex;
+  gap: 20px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  align-items: center;
+}
+
+.card-stats img {
+  height: 100%;
+  width: 160px;
+  object-fit: cover;
+}

@@ -1,0 +1,231 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.cards-home {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 10px;
+  background-color: #F5F3FF;
+  border-radius: 20px;
+}
+
+.cards-background {
+    padding: 10px 70px;
+    margin: 20px 0;
+}
+
+
+.cards-home h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.cards-home > p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px; 
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  width: 100%;
+}
+
+.card h3 {
+  background-color: #5544C4;
+  color: white;
+  margin: 0;
+  padding: 20px 25px; 
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h3 a {
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+.card-content {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-template-rows: auto auto;
+  gap: 15px;
+  min-height: 0; 
+}
+
+.start-date-section {
+  background-color: #f4f3f9;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.start-date-section p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.members-section {
+  background-color: #f4f3f9;
+  border-radius: 10px; 
+  padding: 12px 15px;
+}
+
+.challenge-section {
+  background-color: #f4f3f9;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reason-section {
+  background-color: #f4f3f9;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.challenge-section h4,
+.reason-section h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.challenge-section p,
+.reason-section p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.card p {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card p strong {
+  font-weight: 600;
+}
+
+.card ul {
+  margin: 5px 0 0 0;
+  padding: 0;
+}
+
+.card li {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.card li:last-child {
+  margin-bottom: 0;
+}
+
+.card em {
+  color: #888;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.btn-delete {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+  .cards-home {
+    max-width: 100%;
+    padding: 15px;
+  }
+  
+  .cards-background {
+    padding: 25px;
+    border-radius: 15px;
+  }
+  
+  .card-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 15px;
+  padding: 25PX;
+  }
+  
+  .start-date-section,
+  .members-section,
+  .challenge-section,
+  .reason-section {
+    width: 100%;
+    padding: 12px;
+  }
+  
+  .card h3 {
+    padding: 18px 20px;
+  }
+  
+  .btn-delete {
+    top: 18px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-background {
+    padding: 15px;
+  }
+  
+  .card-content {
+    padding: 12px;
+  }
+  
+  .start-date-section,
+  .members-section,
+  .challenge-section,
+  .reason-section {
+    padding: 10px;
+  }
+}

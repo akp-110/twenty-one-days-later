@@ -1,0 +1,164 @@
+.form-container {
+  background:#F5F3FF;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+     padding: 20px 70px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+  margin: 0 0 40px 0;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 8px;
+  display: block;
+}
+
+
+input[type="text"] {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #2d3748;
+  background: white;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+
+.ts-wrapper {
+  width: 100%;
+}
+
+.ts-control {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  background: white !important;
+  min-height: 52px !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+
+.ts-control:focus,
+.ts-control.focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+.ts-control .item {
+  background: #6366f1 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  margin: 2px !important;
+  font-size: 14px !important;
+}
+
+.ts-control .item .remove {
+  color: white !important;
+  margin-left: 8px !important;
+  opacity: 0.8 !important;
+}
+
+.ts-control .item .remove:hover {
+  opacity: 1 !important;
+}
+
+.ts-dropdown {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  margin-top: 4px !important;
+}
+
+.ts-dropdown .option {
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  color: #2d3748 !important;
+}
+
+.ts-dropdown .option:hover,
+.ts-dropdown .option.active {
+  background: #f7fafc !important;
+  color: #6366f1 !important;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 80%;
+  margin-top: 16px;
+}
+
+.btn-primary:hover {
+  background: #5856eb;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+form > div {
+  margin-bottom: 0;
+}
+
+
+
+@media (max-width: 640px) {
+  .form-container {
+    padding: 32px 24px;
+    margin: 16px;
+  }
+  
+  .form-container h1 {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+  
+  input[type="text"],
+  .ts-control {
+    padding: 14px !important;
+    font-size: 16px !important;
+  }
+}
+
+*:focus {
+  outline: none;
+}
