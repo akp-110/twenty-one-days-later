@@ -82,6 +82,16 @@
   left: -8px;
 }
 
+.star.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.star.next {
+  cursor: pointer;
+  border: 2px dashed gold;
+}
+
 @keyframes sparkle-dot {
   0% {
     transform: scale(1);
