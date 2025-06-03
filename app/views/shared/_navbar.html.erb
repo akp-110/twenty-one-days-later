@@ -17,21 +17,21 @@
       </div>
 
       <%= link_to new_group_path, class: "#{'active' if current_page?(new_group_path)}" do %>
-        <i class="fa-solid fa-square-plus"></i> New group
+        <i class="fa-solid fa-square-plus"></i> New Group
       <% end %>
 
       <%= link_to groups_path, class: "#{'active' if current_page?(groups_path)}" do %>
-        <i class="fa-solid fa-users"></i> Your community
+        <i class="fa-solid fa-users"></i> Groups
       <% end %>
 <hr>
       <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
   </div>
-    </div> 
-  </div>  
+    </div>
+  </div>
 
   <i style="font-size:30px;cursor:pointer;display:none"
      data-action="click->toggle-navbar#open"
      data-toggle-navbar-target="open"
-     class="fa-solid fa-arrow-right-to-bracket open-navbar-icon">
+     class="fa-solid fa-bars open-navbar-icon position-fixed">
   </i>
 <% end %>

@@ -91,7 +91,7 @@
 
         </div>
         <div class="modal-footer">
-        <%= f.button :submit, class: "btn" %>
+        <%= f.button :submit, value:"Add a comment", class: "btn" %>
         </div>
       <% end %>
     </div>
@@ -101,9 +101,6 @@
 
         <%= render "comments/comments_list", comments: @comments %>
 
-        <div class="form-actions mt-4">
-          <%= link_to "Back to Groups", groups_path, class: "btn" %>
-        </div>
 
 
   <script>
