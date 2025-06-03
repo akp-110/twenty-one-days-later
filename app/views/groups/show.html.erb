@@ -51,7 +51,11 @@
     <h4><%= member.first_name %></h4>
     <div class="member-card">
     <div class = "img-box">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="Member image"/>
+    <% if member.photo.attached? %>
+    <%= cl_image_tag member.photo.key, class: ".avatar-square", alt: "avatar", height: 100, width: 100, crop: :fill %>
+    <% else %>
+        <%= image_tag "default-avatar.svg", class: "avatar-square", alt: "avatar", height: 100, width: 100 %>
+    <% end %>
     </div>
         <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
           <% 21.times do |i| %>
