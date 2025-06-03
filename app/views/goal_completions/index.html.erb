@@ -1,5 +1,24 @@
 <h1>Sticker Sheet!</h1>
 
+
+<div data-controller="progress-stars" data-group-id="<%= @goal.id %>">
+  <% (1..21).each do |day| %>
+    <% date = @goal.start_date + (day - 1).days %>
+    <% completed = @completed_dates.include?(date) %>
+    <span
+      class="star <%= 'checked' if completed %>"
+      data-progress-stars-target="star"
+      data-date="<%= date %>">
+      <i class="<%= completed ? 'fa-solid' : 'fa-regular' %> fa-star"></i>
+      <span class="star-number"><%= day %></span>
+    </span>
+  <% end %>
+
+  <i id="checkmark-21-<%= @goal.id %>"
+     class="fa-solid fa-check-circle"
+     style="color: <%= @completed_dates.length >= 21 ? 'green' : 'gray' %>; font-size: 32px; vertical-align: middle; margin-left: 8px;">
+  </i>
+
 <% @group.goals.each do |goal| %>
   <div class="goal-card">
     <h2><%= goal.name %></h2>
@@ -34,4 +53,5 @@
     </div>
   </div>
 <% end %>
+
 </div>
