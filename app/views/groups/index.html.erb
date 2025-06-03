@@ -1,94 +1,71 @@
-<br>
-<br>
-
 <div class="cards-home">
   <h1>My Groups</h1>
   <p>You are in <%= @groups.count %> groups.</p>
 
-<div class="cards">
-	<% @groups.each do |group| %>
-  <div class="card">
-		<h3><%= link_to group.name.titleize, group_path(group) %></h3>
-		<p><strong>Members:</strong></p>
-		<% if group.members.any? %>
-			<ul style="list-style-type:none;">
-				<% group.members.each do |member| %>
-					<li><%= member.email %></li>
-					<% end %>
-			</ul>
-			<% else %> <em>No members yet.</em>
-				<% end %>
-        <% if group.goals.present? %>
-      <p><strong>Goals:</strong></p>
-      <% group.goals.each do |goal| %>
-        <% days_left = (goal.end_date - Date.today).to_i if goal.end_date.present? %>
-        <% days_until_start = (goal.start_date - Date.today).to_i if goal.start_date.present? %>
-
-        <p><strong><%= goal.name %></strong></p>
-
-        <% if days_until_start.present? && days_until_start.positive? %>
-          <p>🚀 <strong><%= days_until_start %> days until this goal begins!</strong></p>
-        <% elsif days_left.present? && days_left.positive? %>
-          <p>⏳ <strong><%= days_left %> days left!</strong></p>
-        <% else %>
-          <p>✅ <strong>Goal deadline reached!</strong></p>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>No goals set for this group yet.</p>
-    <% end %>
-
-					<%= link_to group_path(group),
-              data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
-              class: 'btn-delete' do %> <i class="fa-solid fa-trash"></i>
-						<% end %>
-             </div>
-							<% end %>
   <% if @groups.any? %>
     <div class="cards-background">
-    <div class="cards">
-      <% @groups.sort_by { |group| group.goals.first&.start_date || Date.new(3000, 1, 1) }.each do |group| %>
-        <div class="card">
-          <h3>
-            <%= link_to group.name.titleize, group_path(group) %>
-            <%= link_to group_path(group),
-                        data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
-                        class: 'btn-delete' do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
-          </h3>
-            
+      <div class="cards">
+        <% @groups.sort_by { |group| group.goals.first&.start_date || Date.new(3000, 1, 1) }.each do |group| %>
+          <div class="card">
+            <h3>
+              <%= link_to group.name.titleize, group_path(group) %>
+              <%= link_to group_path(group),
+                          data: { turbo_method: :delete, turbo_confirm: "Delete this group, Are you sure?" },
+                          class: 'btn-delete' do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </h3>
+
             <div class="card-content">
-              <div class="start-date-section">
-                <% if group.goals.first&.start_date.present? %>
-                  <p><strong>Start date:</strong> <br>
-				    <span style="color:#555;"><%= group.goals.first.start_date.strftime("%B %d, %Y") %></p></span>
+
+              <!-- Start Date -->
+              <% if group.goals.first&.start_date.present? %>
+                <div class="start-date-section">
+                  <p><strong>Start date:</strong><br>
+                  <span style="color:#555;"><%= group.goals.first.start_date.strftime("%B %d, %Y") %></span></p>
+                </div>
+              <% end %>
+
+              <!-- Members -->
+              <div class="members-section">
+                <p><strong>Members:</strong></p>
+                <% if group.members.any? %>
+                  <p><%= group.members.map(&:email).join(", ") %></p>
+                <% else %>
+                  <em>No members yet.</em>
                 <% end %>
               </div>
-              
-             <div class="members-section">
-  <p><strong>Members:</strong></p>
-  <% if group.members.any? %>
-    <p>
-      <%= group.members.map(&:first_name).join(", ") %>
-    </p>
-  <% else %>
-    <em>No members yet.</em>
-  <% end %>
-</div>
-                 <div class="challenge-section">
-                <h4>Challenge:</h4>
-                <% group.goals.each do |goal| %>
-                  <p><%= goal.name %></p>
+
+              <!-- Goals -->
+              <% if group.goals.any? %>
+                <div class="challenge-section">
+                  <h4>Challenge:</h4>
+                  <% group.goals.each do |goal| %>
+                    <p><%= goal.name %></p>
+
+                    <% days_left = (goal.end_date - Date.today).to_i if goal.end_date.present? %>
+                    <% days_until_start = (goal.start_date - Date.today).to_i if goal.start_date.present? %>
+
+                    <% if days_until_start.present? && days_until_start.positive? %>
+                      <p>🚀 <strong><%= days_until_start %> days until this goal begins!</strong></p>
+                    <% elsif days_left.present? && days_left.positive? %>
+                      <p>⏳ <strong><%= days_left %> days left!</strong></p>
+                    <% else %>
+                      <p>✅ <strong>Goal deadline reached!</strong></p>
+                    <% end %>
                   <% end %>
-              </div>
-              
-              <div class="reason-section">
-                <h4>Reason:</h4>
-                <% group.goals.each do |goal| %>
-                <p><%= goal.reason %></p>
-                <% end %>
-              </div>
+                </div>
+
+                <div class="reason-section">
+                  <h4>Reason:</h4>
+                  <% group.goals.each do |goal| %>
+                    <p><%= goal.reason %></p>
+                  <% end %>
+                </div>
+              <% else %>
+                <p>No goals set for this group yet.</p>
+              <% end %>
+
             </div>
           </div>
         <% end %>
@@ -100,6 +77,3 @@
     </div>
   <% end %>
 </div>
-
-<br>
-<br>

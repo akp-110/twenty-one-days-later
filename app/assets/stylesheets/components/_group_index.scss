@@ -40,8 +40,27 @@ body {
 }
 
 .card {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+    transform: scale(1.1);
+}
+
+
+
+.card {
   background-color: white;
-  border-radius: 12px; 
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   position: relative;
@@ -52,7 +71,7 @@ body {
   background-color: #5544C4;
   color: white;
   margin: 0;
-  padding: 20px 25px; 
+  padding: 20px 25px;
   font-size: 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -71,7 +90,7 @@ body {
   grid-template-columns: 3fr 7fr;
   grid-template-rows: auto auto;
   gap: 15px;
-  min-height: 0; 
+  min-height: 0;
 }
 
 .start-date-section {
@@ -90,7 +109,7 @@ body {
 
 .members-section {
   background-color: #f4f3f9;
-  border-radius: 10px; 
+  border-radius: 10px;
   padding: 12px 15px;
 }
 
@@ -182,19 +201,19 @@ body {
     max-width: 100%;
     padding: 15px;
   }
-  
+
   .cards-background {
     padding: 25px;
     border-radius: 15px;
   }
-  
+
   .card-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 15px;
   padding: 25PX;
   }
-  
+
   .start-date-section,
   .members-section,
   .challenge-section,
@@ -202,11 +221,11 @@ body {
     width: 100%;
     padding: 12px;
   }
-  
+
   .card h3 {
     padding: 18px 20px;
   }
-  
+
   .btn-delete {
     top: 18px;
     right: 20px;
@@ -217,11 +236,11 @@ body {
   .cards-background {
     padding: 15px;
   }
-  
+
   .card-content {
     padding: 12px;
   }
-  
+
   .start-date-section,
   .members-section,
   .challenge-section,
