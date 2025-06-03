@@ -1,14 +1,15 @@
 <div class="comments mt-3">
   <% comments.each do |comment| %>
-    <div class="comment" style="display: table; width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
+    <div class="comment" data-controller="likes" data-likes-url-value="<%= comment_url(comment)%>" id="comment-<%=comment.id%>" style="display: table; width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
       <div style="display: table-cell; width: 100%; vertical-align: top;">
         <h4 style="margin: 0 0 8px 0;"><%= comment.user.username %></h4>
         <p style="margin: 0 0 8px 0;"><%= comment.message %></p>
-        <p style="margin: 0;"><%= comment.likes %> likes</p>
+        <p data-likes-target="likes" style="margin: 0;"><%= comment.likes %> likes</p>
       </div>
+
       <div style="display: table-cell; vertical-align: top; white-space: nowrap; width: 1px;">
-        <%= link_to comment_path(comment), data: { turbo_method: :patch },
-            style: "color: rgb(13, 41, 253); text-decoration: none; padding: 5px; margin-right: 5px;" do %>
+        <%= button_tag(data: { turbo: false, action: "click->likes#save"},
+            style: "color: rgb(13, 41, 253); text-decoration: none; padding: 5px; margin-right: 5px;") do %>
           <i class="fa-solid fa-thumbs-up"></i>
         <% end %>
         <%= link_to comment_path(comment),

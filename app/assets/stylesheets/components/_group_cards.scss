@@ -9,4 +9,13 @@
   justify-content: flex-start;
   padding: 12px;
   gap: 12px;
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline;
+  }
 }

@@ -1,4 +1,5 @@
 require "faker"
+require "open-uri"
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -24,12 +25,22 @@ puts "Creating Users..."
   email = Faker::Internet.email(domain: '@lewagon.com')
   password = Faker::Internet.password(min_length: 8)
 
-  User.create!(
+  user = User.create!(
     first_name: first_name,
     last_name: last_name,
     username: username,
     email: email,
     password: password
+  )
+
+    # Attach Dicebear avatar
+  avatar_url = "https://api.dicebear.com/8.x/avataaars/png?seed=#{username}"
+  avatar_file = URI.open(avatar_url)
+
+  user.photo.attach(
+    io: avatar_file,
+    filename: "#{username}.png",
+    content_type: "image/png"
   )
 
   puts "Email: #{email}, Password: #{password}, Username: #{username}"

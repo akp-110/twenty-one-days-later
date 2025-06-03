@@ -5,7 +5,7 @@
   width: 300px;
   background-color:  #5544C4;
   position: fixed;
-  height: 90%;
+  height: 100%;
   overflow: auto;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
@@ -83,8 +83,7 @@ div.content {
   display: block;
   background: rgba(185, 185, 185, 0.85);
   border-radius: 51px;
-  position: absolute;
-  bottom: 5px;
+  top: 10px;
   padding: 10px;
   left: 10px;
 }

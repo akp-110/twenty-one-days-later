@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update(likes: @comment.likes + 1)
-    redirect_to group_path(@comment.group)
+    render json: @comment 
   end
 
 
