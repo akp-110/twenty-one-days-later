@@ -29,8 +29,17 @@
 <hr>
       <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
   </div>
+   <div data-controller="quotes">
+  <p data-quotes-target="message" class="loading-message"></p>
+  <blockquote class="quote-box">
+    <p data-quotes-target="quote" class="quote-text"></p>
+    <p data-quotes-target="author" class="quote-author"></p>
+  </blockquote>
+</div>
+</div>
     </div>
   </div>
+
 
   <i style="font-size:30px;cursor:pointer;display:none"
      data-action="click->toggle-navbar#open"
