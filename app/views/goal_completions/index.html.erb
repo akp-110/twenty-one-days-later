@@ -1,20 +1,20 @@
-<h1>sticker sheet!</h1>
+<h1>Sticker Sheet!</h1>
 
-<%# 
-<h1><%= @goal.name %></h1>
-<p><strong>Start Date:</strong> <%= @goal.start_date %></p>
-<p><strong>Reason:</strong> <%= @goal.reason %></p>
-<p><strong>Category:</strong> <%= @goal.category %></p>
-
-<h2>Progress (21 Days)</h2>
-<div id="stars-container" data-goal-id="<%= @goal.id %>">
+<div data-controller="progress-stars" data-group-id="<%= @goal.id %>">
   <% (1..21).each do |day| %>
     <% date = @goal.start_date + (day - 1).days %>
     <% completed = @completed_dates.include?(date) %>
     <span
-      class="star <%= 'completed' if completed %>"
+      class="star <%= 'checked' if completed %>"
+      data-progress-stars-target="star"
       data-date="<%= date %>">
-      ⭐
+      <i class="<%= completed ? 'fa-solid' : 'fa-regular' %> fa-star"></i>
+      <span class="star-number"><%= day %></span>
     </span>
   <% end %>
-</div> %>
+
+  <i id="checkmark-21-<%= @goal.id %>"
+     class="fa-solid fa-check-circle"
+     style="color: <%= @completed_dates.length >= 21 ? 'green' : 'gray' %>; font-size: 32px; vertical-align: middle; margin-left: 8px;">
+  </i>
+</div>

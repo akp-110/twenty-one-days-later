@@ -21,7 +21,7 @@
         <p><strong>Progress:</strong></p>
         <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
           <% 21.times do |i| %>
-            <span class="star" data-day="<%= i %>">
+            <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
               <i class="fa-regular fa-star"></i>
               <span class="star-number"><%= i + 1 %></span>
             </span>
