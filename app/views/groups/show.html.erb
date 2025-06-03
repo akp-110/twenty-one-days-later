@@ -92,7 +92,11 @@
       <div class="member-row">
         <div class="member-info">
           <div class="img-box">
-           <%= image_tag "user.png", alt: "test" %>
+            <% if member.photo.attached? %>
+            <%= cl_image_tag member.photo.key, class: ".avatar-square", alt: "avatar", height: 100, width: 100, crop: :fill %>
+            <% else %>
+             <%= image_tag "default-avatar.svg", class: "avatar-square", alt: "avatar", height: 100, width: 100 %>
+              <% end %>
           </div>
           <h4><%= member.first_name %></h4>
         </div>
