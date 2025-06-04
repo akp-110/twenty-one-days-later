@@ -20,7 +20,7 @@ Rails.application.routes.draw do
  resources :groups, only: [:index, :new, :create, :show, :destroy] do
   resources :group_memberships, only: [:create]
   resources :goals, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :update, :destroy]
 
   resources :goal_completions, only: [] do
     post :update_progress, on: :collection
@@ -28,6 +28,6 @@ Rails.application.routes.draw do
 end
 
 
- 
+
 
 end

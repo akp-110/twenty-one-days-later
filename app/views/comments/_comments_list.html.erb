@@ -1,6 +1,6 @@
 <div class="comments mt-3">
   <% comments.each do |comment| %>
-    <div class="comment" data-controller="likes" data-likes-url-value="<%= comment_url(comment)%>" id="comment-<%=comment.id%>" style="display: table; width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
+    <div class="comment" data-controller="likes" data-likes-url-value="<%= group_comment_url(comment.group, comment)%>" id="comment-<%=comment.id%>" style="display: table; width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
       <div style="display: table-cell; width: 100%; vertical-align: top;">
         <h4 style="margin: 0 0 8px 0;"><%= comment.user.username %></h4>
         <p style="margin: 0 0 8px 0;"><%= comment.message %></p>
@@ -12,7 +12,7 @@
             style: "color: rgb(85, 68, 196); text-decoration: none; padding: 5px; margin-right: 5px;") do %>
           <i class="fa-solid fa-thumbs-up"></i>
         <% end %>
-        <%= link_to comment_path(comment),
+        <%= link_to group_comment_path(comment.group, comment),
             data: { turbo_method: :delete, turbo_confirm: "Delete this comment. Are you sure?" },
             style: "color: #dc3545; text-decoration: none; padding: 5px;" do %>
           <i class="fa-solid fa-trash"></i>
