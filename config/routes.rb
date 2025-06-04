@@ -15,13 +15,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :groups, only: [:index, :new, :create, :show, :destroy] do
-    resources :group_memberships, only: [:create]
-    resources :goals, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:create]
+ resources :groups, only: [:index, :new, :create, :show, :destroy] do
+  resources :group_memberships, only: [:create]
+  resources :goals, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :comments, only: [:create]
 
+  # goal_completions with only update_progress on collection
+  resources :goal_completions, only: [] do
+    post :update_progress, on: :collection
   end
-
-  resources :comments, only: [:destroy,:update]
+end
 
 end
