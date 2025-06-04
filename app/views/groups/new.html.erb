@@ -10,8 +10,8 @@
       <%= form.text_field :name, placeholder: "Smith family"%>
     </div>
     <div>
-      <%= label_tag :user_emails, "Invite Members by Email" %>
-      <%= select_tag "group[user_emails][]", "", multiple: true, id: "user-emails", class: "form-control", placeholder: "sam.smith@gmail.com" %>
+      <%= label_tag :user_username, "Invite Members by Username" %>
+      <%= select_tag "group[user_username][]", "", multiple: true, id: "user-username", class: "form-control", placeholder: "sam.smith123" %>
     </div>
     <div>
       <%= form.submit "We got this!", class: "btn btn-primary btn-custom" %>
@@ -23,18 +23,18 @@
 document.addEventListener("turbo:load", () => {
   const users = [
     <% User.where.not(id: current_user.id).each do |user| %>
-      { email: "<%= user.email %>" },
+      { username: "<%= user.username %>" },
     <% end %>
   ];
-  const select = document.getElementById("user-emails");
+  const select = document.getElementById("user-username");
   if (select && users.length > 0) {
     users.forEach(user => {
       const option = document.createElement("option");
-      option.value = user.email;
-      option.textContent = user.email;
+      option.value = user.username;
+      option.textContent = user.username;
       select.appendChild(option);
     });
-    new TomSelect("#user-emails", {
+    new TomSelect("#user-username", {
       plugins: ['remove_button'],
       create: false,
       persist: false

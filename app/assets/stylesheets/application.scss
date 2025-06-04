@@ -12,6 +12,15 @@
 @import "pages/index";
 @import "components/celebration";
 
+body:not(.landing-page){
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('bg21.png');
+  background-size: cover;
+  background-position: center;
+}
+
+
 body {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;

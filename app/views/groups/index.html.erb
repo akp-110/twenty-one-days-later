@@ -29,7 +29,7 @@
               <div class="members-section">
                 <p><strong>Members:</strong></p>
                 <% if group.members.any? %>
-                  <p><%= group.members.map(&:email).join(", ") %></p>
+                  <p><%= group.members.map(&:username).join(", ") %></p>
                 <% else %>
                   <em>No members yet.</em>
                 <% end %>
