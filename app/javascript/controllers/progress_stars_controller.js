@@ -4,49 +4,100 @@ export default class extends Controller {
   static targets = ["star"]
 
   connect() {
-    console.log("✅ ProgressStarsController connected")
+    this.userId = this.element.dataset.progressStarsUserId
+    this.currentUserId = this.element.dataset.progressStarsCurrentUserId
+    this.goalId = this.element.dataset.goalId
+    this.groupId = this.element.dataset.groupId
 
-    this.groupId = this.element.dataset.groupId || 'default'
-    this.checkmark = document.getElementById(`checkmark-21-${this.groupId}`) || document.getElementById("checkmark-21")
-    this.localStorageKey = `starProgress_${this.groupId}`
+    if (this.userId !== this.currentUserId) {
+      this.disableStars()
+    } else {
+      this.loadState()  // restore from localStorage
+      this.starTargets.forEach(star => {
+        star.addEventListener("click", () => this.toggleStar(star))
+      })
+    }
+  }
 
-    const savedState = JSON.parse(localStorage.getItem(this.localStorageKey)) || []
-    this.starTargets.forEach((star, index) => {
-      const icon = star.querySelector('i')
-      if (savedState[index]) {
-        star.classList.add('checked')
-        icon.classList.replace('fa-regular', 'fa-solid')
-        icon.style.color = 'gold'
-        if (index === 20 && this.checkmark) {
-          this.checkmark.style.color = 'green'
-        }
-      }
-      star.addEventListener('click', () => this.toggleStar(index, star))
+  disableStars() {
+    this.starTargets.forEach(star => {
+      star.classList.remove("clickable")
+      star.style.pointerEvents = "none"
     })
   }
 
-  toggleStar(index, star) {
-    const icon = star.querySelector('i')
-    const isChecked = star.classList.toggle('checked')
+  // Load completion state from localStorage and mark stars checked
+  loadState() {
+    const saved = localStorage.getItem(this.storageKey())
+    if (!saved) return
 
-    if (isChecked) {
-      icon.classList.replace('fa-regular', 'fa-solid')
-      icon.style.color = 'gold'
-    } else {
-      icon.classList.replace('fa-solid', 'fa-regular')
-      icon.style.color = 'gray'
+    const completedDays = JSON.parse(saved) // e.g. [0,1,2,4]
+    this.starTargets.forEach(star => {
+      const day = parseInt(star.dataset.day)
+      const isChecked = completedDays.includes(day)
+      star.classList.toggle("checked", isChecked)
+      const icon = star.querySelector("i")
+      icon.classList.toggle("fa-solid", isChecked)
+      icon.classList.toggle("fa-regular", !isChecked)
+      icon.style.color = isChecked ? "gold" : "gray"
+    })
+
+    // Update checkmark color on load
+    const totalChecked = completedDays.length
+    const checkmark = document.querySelector(`#checkmark-21-${this.goalId}-${this.userId}`)
+    if (checkmark) {
+      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
+    }
+  }
+
+  // Save current completion state to localStorage
+  saveState() {
+    const completedDays = this.starTargets
+      .filter(star => star.classList.contains("checked"))
+      .map(star => parseInt(star.dataset.day))
+    localStorage.setItem(this.storageKey(), JSON.stringify(completedDays))
+  }
+
+  // Unique key for localStorage per user & goal
+  storageKey() {
+    return `progress-${this.goalId}-${this.userId}`
+  }
+
+  toggleStar(star) {
+    const icon = star.querySelector("i")
+    const day = parseInt(star.dataset.day)
+    const isChecked = star.classList.toggle("checked")
+
+    icon.classList.toggle("fa-solid", isChecked)
+    icon.classList.toggle("fa-regular", !isChecked)
+    icon.style.color = isChecked ? "gold" : "gray"
+
+    // Update server
+    fetch(`/groups/${this.groupId}/goal_completions/update_progress`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+      },
+      body: JSON.stringify({
+        day: day - 1,
+        completed: isChecked,
+      }),
+    })
+
+    // Update checkmark color
+    const totalChecked = this.starTargets.filter(s => s.classList.contains("checked")).length
+    const checkmark = document.querySelector(`#checkmark-21-${this.userId}`)
+    if (checkmark) {
+      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
     }
 
-    if (index === 20 && this.checkmark) {
-      this.checkmark.style.color = isChecked ? 'green' : 'gray'
-    }
-
-    const newState = this.starTargets.map(s => s.classList.contains('checked'))
-    localStorage.setItem(this.localStorageKey, JSON.stringify(newState))
+    // Save to localStorage
+    this.saveState()
 
     // Sparkle effect
-    const sparkle = document.createElement('div')
-    sparkle.classList.add('sparkle')
+    const sparkle = document.createElement("div")
+    sparkle.classList.add("sparkle")
     star.appendChild(sparkle)
     setTimeout(() => sparkle.remove(), 500)
   }

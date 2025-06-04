@@ -7,18 +7,22 @@
 //   setTimeout(() => message.remove(), 5000);
 // }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   document.querySelectorAll(".progress-stars").forEach(starContainer => {
-//     const memberName = starContainer.closest(".member-card").querySelector("h4").innerText;
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".progress-stars").forEach(starContainer => {
+    const memberCard = starContainer.closest(".member-card");
+    const memberName = memberCard ? memberCard.querySelector("h4")?.innerText || "Member" : "Member";
 
 //     starContainer.querySelectorAll(".star").forEach(star => {
 //       star.addEventListener("click", function () {
 //         star.classList.toggle("completed");
 
-//         if (starContainer.querySelectorAll(".star.completed").length === 21) {
-//           showCongratulations(memberName);
-//         }
-//       });
-//     });
-//   });
-// });
+
+      if (starContainer.querySelectorAll(".star.completed").length === 21 && !starContainer.dataset.congratulated) {
+        showCongratulations(memberName);
+        starContainer.dataset.congratulated = "true";
+      }
+
+      });
+    });
+  });
+});

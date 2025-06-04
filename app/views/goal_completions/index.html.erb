@@ -1,56 +1,32 @@
 <h1>Sticker Sheet!</h1>
 
+<% @group.members.each do |member| %>
+  <% user_completions = @completed_dates[member.id] || [] %>
+  <div class="member-stars"
+       data-controller="progress-stars"
+       data-progress-stars-user-id="<%= member.id %>"
+       data-progress-stars-current-user-id="<%= current_user.id %>"
+       data-group-id="<%= @group.id %>"
+       data-goal-id="<%= @goal.id %>">
 
-<div data-controller="progress-stars" data-group-id="<%= @goal.id %>">
-  <% (1..21).each do |day| %>
-    <% date = @goal.start_date + (day - 1).days %>
-    <% completed = @completed_dates.include?(date) %>
-    <span
-      class="star <%= 'checked' if completed %>"
-      data-progress-stars-target="star"
-      data-date="<%= date %>">
-      <i class="<%= completed ? 'fa-solid' : 'fa-regular' %> fa-star"></i>
-      <span class="star-number"><%= day %></span>
-    </span>
-  <% end %>
+    <h3><%= member.name %>'s Progress</h3>
 
-  <i id="checkmark-21-<%= @goal.id %>"
-     class="fa-solid fa-check-circle"
-     style="color: <%= @completed_dates.length >= 21 ? 'green' : 'gray' %>; font-size: 32px; vertical-align: middle; margin-left: 8px;">
-  </i>
+    <% (1..21).each do |day| %>
+      <% date = @goal.start_date + (day - 1).days %>
+      <% completed = user_completions.include?(date) %>
+      <span class="star <%= 'checked' if completed %> <%= 'clickable' if member == current_user %>"
+            data-progress-stars-target="star"
+            data-day="<%= day %>">
+        <i class="<%= completed ? 'fa-solid' : 'fa-regular' %> fa-star"></i>
+        <span class="star-number"><%= day %></span>
+      </span>
+    <% end %>
 
-<% @group.goals.each do |goal| %>
-  <div class="goal-card">
-    <h2><%= goal.name %></h2>
-    <p><strong>Start Date:</strong> <%= goal.start_date.strftime("%d %b %Y") %></p>
-
-<p><strong>Start Date:</strong> <%= @goal.start_date %></p>
-<p><strong>Reason:</strong> <%= @goal.reason %></p>
-<p><strong>Category:</strong> <%= @goal.category %></p>
-
-    <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
-  <% if goal.start_date.present? && goal.start_date > Date.today %>
-    🚀 <strong><%= (goal.start_date - Date.today).to_i %> days until this goal starts!</strong>
-  <% elsif goal.end_date.present? %>
-    ⏳ <strong><%= (goal.end_date - Date.today).to_i %> days left!</strong>
-  <% else %>
-    ✅ <strong>Goal deadline reached!</strong>
-  <% end %>
-</p>
-
-    <h2>Progress (21 Days)</h2>
-    <div id="stars-container" data-goal-id="<%= goal.id %>">
-      <% (1..21).each do |day| %>
-        <% date = goal.start_date + (day - 1).days %>
-        <% completed = @completed_dates.include?(date) %>
-        <span
-          class="star <%= 'completed' if completed %>"
-          data-date="<%= date %>">
-          ⭐
-        </span>
-      <% end %>
-    </div>
+    <% if member == current_user %>
+      <i id="checkmark-21-<%= @goal.id %>-<%= member.id %>"
+         class="fa-solid fa-check-circle"
+         style="color: <%= (@completed_dates[member.id]&.length || 0) >= 21 ? 'green' : 'gray' %>; font-size: 32px; vertical-align: middle; margin-left: 8px;">
+      </i>
+    <% end %>
   </div>
 <% end %>
-
-</div>
