@@ -24,5 +24,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
       });
     });
-  });
-});
