@@ -4,12 +4,12 @@
       <div style="display: table-cell; width: 100%; vertical-align: top;">
         <h4 style="margin: 0 0 8px 0;"><%= comment.user.username %></h4>
         <p style="margin: 0 0 8px 0;"><%= comment.message %></p>
-        <p data-likes-target="likes" style="margin: 0;"><%= comment.likes %> likes</p>
+        <p data-likes-target="likes" style="margin: 0;"><%= comment.likes %>likes</p>
       </div>
 
       <div style="display: table-cell; vertical-align: top; white-space: nowrap; width: 1px;">
         <%= button_tag(data: { turbo: false, action: "click->likes#save"},
-            style: "color: rgb(13, 41, 253); text-decoration: none; padding: 5px; margin-right: 5px;") do %>
+            style: "color: rgb(85, 68, 196); text-decoration: none; padding: 5px; margin-right: 5px;") do %>
           <i class="fa-solid fa-thumbs-up"></i>
         <% end %>
         <%= link_to comment_path(comment),
