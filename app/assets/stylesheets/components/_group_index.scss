@@ -57,7 +57,6 @@ body {
 }
 
 
-
 .card {
   background-color: white;
   border-radius: 12px;
@@ -184,6 +183,7 @@ body {
   position: absolute;
   top: 20px;
   right: 25px;
+  z-index: 10;
   color: white;
   background: none;
   border: none;
@@ -247,4 +247,15 @@ body {
   .reason-section {
     padding: 10px;
   }
+}
+
+.cards-home,
+.cards-background,
+.card,
+.card-content,
+.start-date-section,
+.members-section,
+.challenge-section,
+.reason-section {
+  color: #000 !important; /* 🚀 Ensures black text everywhere */
 }

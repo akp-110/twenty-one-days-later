@@ -12,6 +12,15 @@
 @import "pages/index";
 @import "components/celebration";
 
+body:not(.landing-page){
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('bg21.png');
+  background-size: cover;
+  background-position: center;
+}
+
+
 body {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
@@ -40,4 +49,8 @@ input::placeholder, textarea::placeholder {
 
 .btn:hover {
   background-color: #5a3e9e;
+}
+
+a {
+  text-decoration: none !important;
 }

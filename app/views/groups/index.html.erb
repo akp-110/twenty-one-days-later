@@ -15,9 +15,8 @@
                 <i class="fa-solid fa-trash"></i>
               <% end %>
             </h3>
-
+          <%= link_to group_path(group), class: "card-content-link" do %>
             <div class="card-content">
-
               <!-- Start Date -->
               <% if group.goals.first&.start_date.present? %>
                 <div class="start-date-section">
@@ -30,7 +29,7 @@
               <div class="members-section">
                 <p><strong>Members:</strong></p>
                 <% if group.members.any? %>
-                  <p><%= group.members.map(&:email).join(", ") %></p>
+                  <p><%= group.members.map(&:username).join(", ") %></p>
                 <% else %>
                   <em>No members yet.</em>
                 <% end %>
@@ -67,6 +66,7 @@
               <% end %>
 
             </div>
+            <% end %>
           </div>
         <% end %>
       </div>
