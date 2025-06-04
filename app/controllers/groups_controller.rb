@@ -33,6 +33,11 @@ class GroupsController < ApplicationController
     @comment = Comment.new
     @comments = @group.comments
 
+      @completed_dates = GoalCompletion
+    .where(goal: @goal)
+    .group_by(&:user_id)
+    .transform_values { |completions| completions.map(&:date) }
+
     @goal = @group.goals.first # ✅ Load the first goal for the countdown
 
     unless @group
