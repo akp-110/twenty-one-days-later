@@ -1,12 +1,14 @@
 .congrats-message {
   position: fixed;
-  top: 20%;
-  left: 50%;
+  top: 30%;
+  left: 60%;
   transform: translateX(-50%);
-  background-color: #28a745;
-  color: white;
-  padding: 15px 25px;
-  font-size: 1.2rem;
+  background:#60cfb9;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 30px;
+  font-size: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   opacity: 1;
