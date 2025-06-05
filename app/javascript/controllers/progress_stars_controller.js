@@ -47,7 +47,7 @@ export default class extends Controller {
     const totalChecked = completedDays.length
     const checkmark = document.querySelector(`#checkmark-21-${this.goalId}-${this.userId}`)
     if (checkmark) {
-      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
+      checkmark.style.color = totalChecked >= 21 ? "#3cd53c" : "white"
     }
   }
 
@@ -93,7 +93,7 @@ export default class extends Controller {
     console.log({userId: this.userId})
     console.log({checkmark})
     if (checkmark) {
-      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
+      checkmark.style.color = totalChecked >= 21 ? "#3c9d3c" : "#ffffff"
     }
 
     // Save to localStorage
