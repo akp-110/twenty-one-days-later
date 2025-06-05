@@ -31,7 +31,7 @@
         <% days_until_start = (goal.start_date - Date.today).to_i %>
         <% if days_until_start.positive? %>
           <p class="countdown-message" id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
-            :rocket: <strong><%= days_until_start %> days until the goal begins!</strong>
+            <strong>🚀<%= days_until_start %> days until the goal begins!</strong>
           </p>
         <% end %>
       <% end %>
@@ -55,7 +55,7 @@
               <% days_left = (goal.end_date - Date.today).to_i %>
               <% if days_until_start.positive? %>
                 <p id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
-                  :rocket: <strong><%= days_until_start %> days until <%= goal.name %> begins!</strong>
+                  <strong>🚀 <%= days_until_start %> days until <%= goal.name %> begins!</strong>
                 </p>
               <% elsif days_left.positive? %>
                 <p id="countdown-<%= goal.id %>" data-end-date="<%= goal.end_date %>">
@@ -160,7 +160,7 @@
         const today = new Date().getTime();
         const difference = startDate - today;
         const daysUntilStart = Math.ceil(difference / (1000 * 60 * 60 * 24));
-        preStartCountdown.innerText = `:rocket: ${daysUntilStart} days until the goal begins!`;
+        preStartCountdown.innerText = `🚀 ${daysUntilStart} days until the goal begins!`;
         if (daysUntilStart <= 0) {
           preStartCountdown.style.display = "none";
           const countdownElement = document.getElementById(`countdown-${preStartCountdown.id.replace("pre-start-countdown-", "")}`);
