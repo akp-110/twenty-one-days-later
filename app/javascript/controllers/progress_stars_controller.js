@@ -118,7 +118,7 @@ export default class extends Controller {
     console.log("congratulation");
     const message = document.createElement("div");
     message.classList.add("congrats-message");
-    message.innerHTML = "🎉 Congratulations!<br> You've unstoppable! 🚀";
+    message.innerHTML = "🎉 Congratulations!<br> You are unstoppable! 🚀";
 
 
   document.body.appendChild(message);
