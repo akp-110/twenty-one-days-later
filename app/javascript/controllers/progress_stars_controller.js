@@ -45,7 +45,9 @@ export default class extends Controller {
 
     // Update checkmark color on load
     const totalChecked = completedDays.length
-    const checkmark = document.querySelector(`#checkmark-21-${this.goalId}-${this.userId}`)
+    console.log(totalChecked)
+    const checkmark = document.querySelector(`#checkmark-21-${this.userId}`)
+    console.log(checkmark)
     if (checkmark) {
       checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
     }
