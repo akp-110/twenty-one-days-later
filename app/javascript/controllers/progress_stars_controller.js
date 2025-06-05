@@ -49,7 +49,7 @@ export default class extends Controller {
     const checkmark = document.querySelector(`#checkmark-21-${this.userId}`)
     console.log(checkmark)
     if (checkmark) {
-      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
+      checkmark.style.color = totalChecked >= 21 ? "#3cd53c" : "white"
     }
   }
 
@@ -96,7 +96,7 @@ export default class extends Controller {
     console.log({userId: this.userId})
     console.log({checkmark})
     if (checkmark) {
-      checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
+      checkmark.style.color = totalChecked >= 21 ? "#3c9d3c" : "#ffffff"
     }
     if (totalChecked >= 21) {
       this.showCongratulationsMessage();
