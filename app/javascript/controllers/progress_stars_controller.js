@@ -67,13 +67,13 @@ export default class extends Controller {
   }
 
   toggleStar(star) {
-    const icon = star.querySelector("i")
-    const day = parseInt(star.dataset.day)
-    const isChecked = star.classList.toggle("checked")
+    const icon = star.querySelector("i");
+    const day = parseInt(star.dataset.day);
+    const isChecked = star.classList.toggle("checked");
 
-    icon.classList.toggle("fa-solid", isChecked)
-    icon.classList.toggle("fa-regular", !isChecked)
-    icon.style.color = isChecked ? "gold" : "gray"
+    icon.classList.toggle("fa-solid", isChecked);
+    icon.classList.toggle("fa-regular", !isChecked);
+    icon.style.color = isChecked ? "gold" : "gray";
 
     // Update server
     fetch(`/groups/${this.groupId}/goal_completions/update_progress`, {
@@ -88,6 +88,7 @@ export default class extends Controller {
       }),
     })
 
+
     // Update checkmark color
     const totalChecked = this.starTargets.filter(s => s.classList.contains("checked")).length
     console.log({totalChecked})
@@ -97,6 +98,10 @@ export default class extends Controller {
     if (checkmark) {
       checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
     }
+    if (totalChecked >= 21) {
+      this.showCongratulationsMessage();
+    }
+
 
     // Save to localStorage
     this.saveState()
@@ -106,5 +111,19 @@ export default class extends Controller {
     sparkle.classList.add("sparkle")
     star.appendChild(sparkle)
     setTimeout(() => sparkle.remove(), 500)
+  }
+
+  showCongratulationsMessage() {
+    console.log("congratulation");
+    const message = document.createElement("div");
+    message.classList.add("congrats-message");
+    message.innerHTML = "🎉 Congratulations! You've unstopabble! 🚀";
+
+    document.body.appendChild(message);
+
+    setTimeout(() => {
+      message.style.opacity = "0";
+      setTimeout(() => message.remove(), 500);
+    }, 3000);
   }
 }

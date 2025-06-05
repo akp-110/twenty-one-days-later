@@ -1,22 +1,18 @@
-// $light-blue: #a7c7e7;
+.congrats-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
 
-// h2 {
-//   color: $light-blue;
-//   font-size: 24px;
-//   font-weight: bold;
-// }
-
-// p {
-//   color: #444;
-//   font-size: 18px;
-//   font-weight: bold;
-// }
-
-// // div {
-// //   background: #5544C4;
-// //   padding: 15px;
-// //   border-radius: 10px;
-// //   text-align: center;
-// //   font-size: 22px;
-// //   font-family: 'Poppins', sans-serif;
-// // }
+.congrats-message.fade-out {
+  opacity: 0;
+}
