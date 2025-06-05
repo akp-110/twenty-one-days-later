@@ -88,7 +88,6 @@ export default class extends Controller {
       }),
     })
 
-
     // Update checkmark color
     const totalChecked = this.starTargets.filter(s => s.classList.contains("checked")).length
     console.log({totalChecked})
@@ -113,17 +112,42 @@ export default class extends Controller {
     setTimeout(() => sparkle.remove(), 500)
   }
 
+
   showCongratulationsMessage() {
+
     console.log("congratulation");
     const message = document.createElement("div");
     message.classList.add("congrats-message");
-    message.innerHTML = "🎉 Congratulations!<br> You've unstopabble! 🚀";
+    message.innerHTML = "🎉 Congratulations!<br> You've unstoppable! 🚀";
 
-    document.body.appendChild(message);
 
-    setTimeout(() => {
-      message.style.opacity = "0";
-      setTimeout(() => message.remove(), 500);
-    }, 3000);
+  document.body.appendChild(message);
+
+  // ✅ Call the fireworks function here
+  this.triggerFireworks();
+
+  // ✅ Auto-remove message after 3 seconds
+  setTimeout(() => {
+    message.style.opacity = "0";
+    setTimeout(() => message.remove(), 500);
+  }, 3000);
+}
+
+ triggerFireworks() {
+  const fireworksContainer = document.createElement("div");
+  fireworksContainer.classList.add("fireworks-container");
+
+  for (let i = 0; i < 25; i++) { // 🔥 Creates multiple firework bursts
+    const firework = document.createElement("div");
+    firework.classList.add("firework");
+    firework.style.right = `${Math.random() * 100}vw`;
+    firework.style.bottom = `${Math.random() * 100}vh`;
+
+    fireworksContainer.appendChild(firework);
   }
+
+  document.body.appendChild(fireworksContainer);
+
+  setTimeout(() => fireworksContainer.remove(), 3000);
+}
 }

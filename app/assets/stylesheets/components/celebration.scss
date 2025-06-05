@@ -14,7 +14,37 @@
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
-
 .congrats-message.fade-out {
   opacity: 0;
+}
+
+/* 🎆 Fireworks Effect */
+.fireworks-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.firework {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, rgb(232, 228, 13),#60cfb9);
+  border-radius: 50%;
+  animation: explode 3.0s ease-out infinite;
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(7) translateY(-300px); /* 🔥 Move upward */
+  }
 }
