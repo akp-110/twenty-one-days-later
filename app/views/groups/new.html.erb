@@ -11,7 +11,7 @@
     </div>
     <div>
       <%= label_tag :user_username, "Invite Members by Username" %>
-      <%= select_tag "group[user_username][]", "", multiple: true, id: "user-username", class: "form-control", placeholder: "sam.smith123" %>
+      <%= select_tag "group[user_usernames][]", "", multiple: true, id: "user-usernames", class: "form-control", placeholder: "sam.smith123" %>
     </div>
     <div>
       <%= form.submit "We got this!", class: "btn btn-primary btn-custom" %>
@@ -26,7 +26,7 @@ document.addEventListener("turbo:load", () => {
       { username: "<%= user.username %>" },
     <% end %>
   ];
-  const select = document.getElementById("user-username");
+  const select = document.getElementById("user-usernames");
   if (select && users.length > 0) {
     users.forEach(user => {
       const option = document.createElement("option");
@@ -34,7 +34,7 @@ document.addEventListener("turbo:load", () => {
       option.textContent = user.username;
       select.appendChild(option);
     });
-    new TomSelect("#user-username", {
+    new TomSelect("#user-usernames", {
       plugins: ['remove_button'],
       create: false,
       persist: false

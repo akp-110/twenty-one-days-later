@@ -12,8 +12,8 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(name: group_params[:name], user: current_user)
     if @group.save
-      emails = Array(group_params[:user_emails]).reject(&:blank?)
-      users = User.where(email: emails)
+      usernames = Array(group_params[:user_usernames]).reject(&:blank?)
+      users = User.where(username: usernames)
       users.each do |user|
         @group.group_memberships.create(user: user)
       end
@@ -55,6 +55,6 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, user_emails: [])
+    params.require(:group).permit(:name, user_usernames: [])
   end
 end
