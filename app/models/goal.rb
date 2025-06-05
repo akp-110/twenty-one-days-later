@@ -1,6 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :group
+  has_many :goal_completions, dependent: :destroy
   validates :name, presence: true
   validates :reason, presence: true
   validates :start_date, presence: true
