@@ -6,6 +6,7 @@ export default class extends Controller {
   connect() {
     this.userId = this.element.dataset.progressStarsUserId
     this.currentUserId = this.element.dataset.progressStarsCurrentUserId
+    console.log(this.element)
     this.goalId = this.element.dataset.goalId
     this.groupId = this.element.dataset.groupId
 
@@ -87,7 +88,10 @@ export default class extends Controller {
 
     // Update checkmark color
     const totalChecked = this.starTargets.filter(s => s.classList.contains("checked")).length
+    console.log({totalChecked})
     const checkmark = document.querySelector(`#checkmark-21-${this.userId}`)
+    console.log({userId: this.userId})
+    console.log({checkmark})
     if (checkmark) {
       checkmark.style.color = totalChecked >= 21 ? "green" : "gray"
     }
