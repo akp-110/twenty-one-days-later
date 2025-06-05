@@ -1,3 +1,5 @@
+<br>
+<br>
 <div class="content-wrapper">
   <div class="main-header-container">
     <div class="header-flex-container">
@@ -6,9 +8,12 @@
       </div>
       <div class="progress-indicators">
         <% @group.members.each do |member| %>
-          <%= image_tag "user.png", alt: "test" %>
+       <% if member.photo.attached? %>
+                <%= cl_image_tag member.photo.key, class: ".avatar-square", alt: "avatar", height: 100, width: 100, crop: :fill %>
+              <% else %>
+                <%= image_tag "default-avatar.svg", class: "avatar-square", alt: "avatar", height: 100, width: 100 %>
+              <% end %>
         <% end %>
-
       </div>
     </div>
     <% if @group.goals.present? %>
@@ -31,7 +36,7 @@
         <% days_until_start = (goal.start_date - Date.today).to_i %>
         <% if days_until_start.positive? %>
           <p class="countdown-message" id="pre-start-countdown-<%= goal.id %>" data-start-date="<%= goal.start_date %>">
-            :rocket: <strong><%= days_until_start %> days until the goal begins!</strong>
+          🚀: <strong><%= days_until_start %> days until the goal begins!</strong>
           </p>
         <% end %>
       <% end %>
@@ -40,7 +45,7 @@
   <div class="group-show">
     <% if @group.goals.empty? %>
       <div class="form-actions">
-        <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn btn-success" %>
+        <%= link_to "Set a Goal for This Group", new_group_goal_path(@group), class: "btn2 btn-success2" %>
       </div>
     <% else %>
       <div class="goals-section" style="display: none;">
@@ -88,7 +93,11 @@
             <h4><%= member.first_name %></h4>
           </div>
           <div class="member-card">
-            <div class="progress-stars" data-controller="progress-stars" data-group-id="<%= @group.id %>">
+            <div class="progress-stars" data-controller="progress-stars"
+                   data-progress-stars-user-id="<%= member.id %>"
+       data-progress-stars-current-user-id="<%= current_user.id %>"
+       data-group-id="<%= @group.id %>"
+       data-goal-id="<%= goal.id %>">>
               <div class="stars-row">
                 <% 11.times do |i| %>
                   <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
@@ -102,10 +111,8 @@
                     <i class="fa-regular fa-star"></i>
                   </span>
                 <% end %>
-                <i id="checkmark-21-<%= @group.id %>" class="fas fa-check-circle"></i>
-                <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <i class="fas fa-comment-alt"></i>
-                </button>
+                <i id="checkmark-21-<%= member.id %>" class="fas fa-check-circle"></i>
+               
               </div>
             </div>
           </div>
@@ -116,6 +123,10 @@
   <p style="display: none;"><strong>Members:</strong> <%= @group.members.count %></p>
   <div class="member-progress-header">
     <h2>Comments</h2>
+     <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fas fa-comment-alt"></i>
+       <p>add a comment</p>
+        </button>
   </div>
   <div class="members-container">
     <%= render "comments/comments_list", comments: @comments %>
