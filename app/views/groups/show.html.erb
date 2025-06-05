@@ -76,10 +76,12 @@
         <% end %>
       </div>
     <% end %>
+   
     <div class="member-progress-header">
       <h2>Member Progress</h2>
     </div>
     <div class="members-container">
+    <% if @goal %>
       <% @group.members.each do |member| %>
         <div class="member-row">
           <div class="member-info">
@@ -97,7 +99,7 @@
                    data-progress-stars-user-id="<%= member.id %>"
        data-progress-stars-current-user-id="<%= current_user.id %>"
        data-group-id="<%= @group.id %>"
-       data-goal-id="<%= goal.id %>">>
+       data-goal-id="<%= @goal.id %>">>
               <div class="stars-row">
                 <% 11.times do |i| %>
                   <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
@@ -118,6 +120,9 @@
           </div>
         </div>
       <% end %>
+       <% else %>
+       <p>No goal set</p>
+       <% end %>
     </div>
   </div>
   <p style="display: none;"><strong>Members:</strong> <%= @group.members.count %></p>
