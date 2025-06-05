@@ -101,7 +101,7 @@
                    data-progress-stars-user-id="<%= member.id %>"
        data-progress-stars-current-user-id="<%= current_user.id %>"
        data-group-id="<%= @group.id %>"
-       data-goal-id="<%= @goal.id %>">>
+       data-goal-id="<%= @goal.id %>">
               <div class="stars-row">
                 <% 11.times do |i| %>
                   <span class="star" data-progress-stars-target="star" data-day="<%= i %>">
@@ -129,11 +129,14 @@
   </div>
   <p style="display: none;"><strong>Members:</strong> <%= @group.members.count %></p>
   <div class="member-progress-header">
+    <div class="comments-title">
     <h2>Comments</h2>
      <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+       <p class="comment-icon">Add a comment</p>
       <i class="fas fa-comment-alt"></i>
-       <p>add a comment</p>
+      
         </button>
+    </div>
   </div>
   <div class="members-container">
     <%= render "comments/comments_list", comments: @comments %>
